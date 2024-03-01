@@ -1,0 +1,14 @@
+﻿<MudDrawer @bind-Open="@open" ClipMode="DrawerClipMode.Never" Breakpoint="Breakpoint.Sm" PreserveOpenState="false" Elevation="1" Variant="@DrawerVariant.Mini">
+    <MudNavMenu>
+        <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Store">Store</MudNavLink>
+        <MudNavLink Href="counter" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.LibraryBooks">Library</MudNavLink>
+        <MudNavLink Href="weather" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Group">Community</MudNavLink>
+        <MudNavLink Href="admin" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.AdminPanelSettings">Admin settings</MudNavLink>
+        <MudNavLink Href="/quizzes" Icon="@Icons.Material.Filled.Home">Quizzes</MudNavLink>
+        <MudNavLink Href="/edit-quiz" Icon="@Icons.Material.Filled.AddBox">Create Quiz</MudNavLink>
+    </MudNavMenu>
+</MudDrawer>
+
+@code {
+    [Parameter] public bool open { get; set; }
+}

@@ -1,0 +1,63 @@
+﻿@inherits LayoutComponentBase
+<MudThemeProvider @bind-IsDarkMode="@_isDarkMode" Theme="_theme" />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<MudLayout>
+    <MudAppBar Elevation="1" Dense="false">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@ToggleDrawer" />
+
+        <MudSpacer />
+        @* <LanguageSelector /> *@
+        <MudToggleIconButton @bind-Toggled="@_isDarkMode"
+                             Icon="@Icons.Material.Filled.DarkMode" Title="Swith to light mode"
+                             ToggledIcon="@Icons.Material.Filled.LightMode" ToggledTitle="Swith to dark mode" />
+        <LoginDisplay />
+    </MudAppBar>
+    <NavMenu open=open></NavMenu>
+    <MudMainContent>
+        <MudContainer MaxWidth="MaxWidth.Large" Class="mt-3" >
+        @Body
+        </MudContainer>
+    </MudMainContent>
+</MudLayout>
+@code {
+    bool open = false;
+    bool preserveOpenState = false;
+    Breakpoint breakpoint = Breakpoint.Lg;
+    DrawerClipMode clipMode = DrawerClipMode.Never;
+    MudTheme _theme = new MudTheme()
+        {
+            Palette = new PaletteLight()
+            {
+                Primary = MudBlazor.Colors.Blue.Darken2,
+                Secondary = MudBlazor.Colors.Green.Accent4,
+                AppbarBackground = MudBlazor.Colors.BlueGrey.Default,
+              //  Background = Colors.Grey.Lighten1
+
+            },
+            PaletteDark = new PaletteDark()
+            {
+                Primary = MudBlazor.Colors.Blue.Darken2,
+                
+            },
+
+            LayoutProperties = new LayoutProperties()
+            {
+                DrawerWidthLeft = "260px",
+                DrawerWidthRight = "300px"
+            }
+        };
+    private bool _isDarkMode = true;
+    void ToggleDrawer()
+    {
+        open = !open;
+    }
+
+    private Task OnSystemPreferenceChanged(bool newValue)
+    {
+        _isDarkMode = newValue;
+        StateHasChanged();
+        return Task.CompletedTask;
+    }
+}

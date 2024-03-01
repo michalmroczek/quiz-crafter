@@ -1,0 +1,27 @@
+﻿@page "/"
+@using Microsoft.Extensions.Localization
+@* @inject HttpClient httpClient *@
+@inject NavigationManager NavigationManager
+@inject IStringLocalizer<Home> Localizer
+@* @inject LazyCultureProvider LazyCultureProvider *@
+<MudGrid Spacing="4" Justify="Justify.Center">
+    <MudItem xs="12"><MudFab Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add" OnClick="CreateNewWorkspace" /></MudItem>
+    </MudGrid>
+    @code {
+
+    private void CreateNewWorkspace()
+    {
+        NavigationManager.NavigateTo("create");
+    }
+
+    private string serverMessage = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        // await LazyCultureProvider.SubscribeLanguageChangeAsync(this);
+
+    }
+
+    // public void Dispose() => LazyCultureProvider.UnsubscribeLanguageChange(this);
+
+}
