@@ -1,0 +1,15 @@
+﻿::deep .sortable-ghost {
+    visibility: hidden;
+}
+
+::deep .sortable-fallback {
+    opacity: 1 !important;
+}
+
+::deep .ghost {
+    opacity: 1 !important;
+    background-color: #808080;
+    width: 500px;
+    height: 200px;
+    border: 1px solid blue;
+}

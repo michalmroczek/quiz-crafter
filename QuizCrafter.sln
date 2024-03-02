@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizCrafter.Web", "src\QuizCrafter.Web\QuizCrafter.Web.csproj", "{F9051F71-B6D5-4EBF-8462-4D87104D22A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizCrafter.Web", "src\QuizCrafter.Web\QuizCrafter.Web.csproj", "{F9051F71-B6D5-4EBF-8462-4D87104D22A7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{45F07D38-849F-47C9-92C8-0046E2204A29}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizCrafter.Shared.Components", "src\Shared\QuizCrafter.Shared.Components\QuizCrafter.Shared.Components.csproj", "{7CC82D26-C304-46AB-919E-CA9137D737AB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +19,16 @@ Global
 		{F9051F71-B6D5-4EBF-8462-4D87104D22A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9051F71-B6D5-4EBF-8462-4D87104D22A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9051F71-B6D5-4EBF-8462-4D87104D22A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CC82D26-C304-46AB-919E-CA9137D737AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CC82D26-C304-46AB-919E-CA9137D737AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CC82D26-C304-46AB-919E-CA9137D737AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CC82D26-C304-46AB-919E-CA9137D737AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7CC82D26-C304-46AB-919E-CA9137D737AB} = {45F07D38-849F-47C9-92C8-0046E2204A29}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2D618763-F8C8-407A-8B6B-2D3618F42780}
