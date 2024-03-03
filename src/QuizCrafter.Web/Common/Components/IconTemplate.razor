@@ -1,0 +1,13 @@
+﻿@using MudBlazor
+
+<button class="icon-block">
+    <MudIcon Icon="@Icon" Size="Size.Medium" Title="@Name"></MudIcon>
+    <MudText Typo="Typo.caption">@Name</MudText>
+    </button>
+    @code {
+    [Parameter]
+    public string Name { get; set; }
+
+    [Parameter]
+    public string Icon { get; set; }
+}

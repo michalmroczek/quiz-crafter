@@ -34,7 +34,7 @@ export function init(id, group, pull, put, sort, handle, filter, component, forc
         },
         onAdd: (event) => {
             console.log(event);
-            component.invokeMethodAsync('OnAddJS', event.newDraggableIndex);
+            component.invokeMethodAsync('OnAddJS', event.oldDraggableIndex, event.newDraggableIndex);
         },
         onEnd: (event) => {
             console.log(event);
