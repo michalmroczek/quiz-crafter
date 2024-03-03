@@ -68,7 +68,8 @@
         if (firstRender)
         {
             selfReference = DotNetObjectReference.Create(this);
-            var module = await JS.InvokeAsync<IJSObjectReference>("import", "./SortableList.razor.js");
+            var sortableImport = await JS.InvokeAsync<IJSObjectReference>("import", "./_content/QuizCrafter.Shared.Components/scripts/sortable.min.js");
+            var module = await JS.InvokeAsync<IJSObjectReference>("import", "./_content/QuizCrafter.Shared.Components/SortableList.razor.js");
             await module.InvokeAsync<string>("init", Id, Group, Pull, Put, Sort, Handle, Filter, selfReference, ForceFallback);
         }
     }
@@ -88,10 +89,10 @@
     }
 
     [JSInvokable]
-    public void OnAddJS(object value)
+    public void OnAddJS(int oldIndex, int newIndex)
     {
         // remove the item from the list
-        // OnAdd.InvokeAsync((oldIndex, newIndex));
+         OnAdd.InvokeAsync((oldIndex, newIndex));
     }
 
     [JSInvokable]

@@ -1,0 +1,85 @@
+﻿@using MudBlazor
+
+    <MudGrid Justify="Justify.Center">
+        <MudItem xs="10">
+            <MudCard Class="primary mt-5 rounded" Elevation="4">
+                <MudIcon Icon="@Icons.Material.Filled.DragIndicator" Title="Drag" Class="drag-handle-question" Style="cursor:grab" />
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h6">Question @Question.Order/@QuestionsCount</MudText>
+                            <MudTextField @bind-Value="Question.Text" Label="Question text" Variant="MudBlazor.Variant.Outlined"   
+                    AutoGrow
+                         ></MudTextField>
+                     </CardHeaderContent>
+                     <CardHeaderActions>
+                         @DeleteAction
+                        <MudIconButton Icon="@Icons.Material.Filled.Delete" ></MudIconButton>
+                    </CardHeaderActions>
+                </MudCardHeader>
+                <MudCardContent>
+                    <MudGrid>
+                      @*   <SortableList Id="@SortableHtmlId" Items="Question?.Answers" OnUpdate="@SortList" Handle=".drag-handle-answer" Context="answer" Class="mud-grid-item mud-grid-item-xs-12">
+                            <SortableItemTemplate>
+                                <AnswerEditable Answer="answer" OnDeleteAsync="DeleteAnswer"></AnswerEditable>
+                            </SortableItemTemplate>
+                        </SortableList> *@
+                    </MudGrid>
+                </MudCardContent>
+                <MudCardActions>
+                    @Actions
+                                 <MudButton OnClick="()=>AddAnswer()" Variant="MudBlazor.Variant.Text" Color="Color.Primary">Add answer</MudButton> <MudSpacer /> <MudButton Variant="MudBlazor.Variant.Text" Color="Color.Primary">Submit</MudButton>
+
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+
+@code {
+    private string SortableHtmlId => $"sortable-answer-{Question.Order.ToString()}";
+
+    [Parameter]
+    public Models.Question Question { get; set; }
+
+    [Parameter]
+    public int QuestionsCount { get; set; }
+
+    [Parameter]
+    public RenderFragment Actions { get; set; }
+
+    [Parameter]
+    public RenderFragment DeleteAction { get; set; }
+
+    [Parameter]
+    public bool DisplayAsIcon { get; set; }
+
+    public void DeleteAnswer(Models.Answer answer)
+    {
+        //delete answer
+    }
+
+    private void SortList((int oldIndex, int newIndex) indices)
+    {
+        // deconstruct the tuple
+        var (oldIndex, newIndex) = indices;
+
+        var items = Question?.Answers.ToList();
+        var itemToMove = items[oldIndex];
+        items.RemoveAt(oldIndex);
+
+        if (newIndex < items.Count)
+        {
+            items.Insert(newIndex, itemToMove);
+        }
+        else
+        {
+            items.Add(itemToMove);
+        }
+
+        StateHasChanged();
+    }
+
+    private void AddAnswer()
+    {
+        Question.AddAnswer(new Models.Answer());
+    }
+}

@@ -1,0 +1,36 @@
+﻿@using QuizCrafter.Web.Common.ModularComponents
+ <MudDrawer @bind-Open="@open" DisableOverlay="true" Elevation="1" Variant="@DrawerVariant.Temporary" Anchor="Anchor.Right" Style="margin-top:30px;">
+     <MudDrawerHeader>
+         <MudText Typo="Typo.h6">My App</MudText>
+     </MudDrawerHeader>
+    <SortableList Id="drawer" Group="cloning" Pull="clone" Class="d-flex mud-width-full" Items="ModularComponentsDefinitionCollection.Instances" OnRemove="ListTwoRemove" Context="definitionTypes" Sort="false">
+             <SortableItemTemplate>
+
+                 <DynamicComponent Type="definitionTypes.IconComponentType"></DynamicComponent>
+             </SortableItemTemplate>
+         </SortableList>
+
+ </MudDrawer>
+
+ <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => ToggleDrawer())">Toggle drawer</MudButton>
+@code {
+
+    private void ListTwoRemove((int oldIndex, int newIndex) indices)
+    {
+        var (oldIndex, newIndex) = indices;
+       // var item = ModularComponentsDefinitionCollection.Instances[indices.oldIndex];
+        //qestionList.Insert(newIndex, clone);
+        //quiz.AddQuestion(item.CreateModel());
+
+        StateHasChanged();
+        //    questionTypes.Remove(questionTypes[indices.oldIndex]);
+    }
+
+    bool open = true;
+
+    void ToggleDrawer()
+    {
+        open = !open;
+    }
+
+}
