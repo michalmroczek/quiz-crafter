@@ -1,0 +1,28 @@
+﻿@using System.Diagnostics.CodeAnalysis
+<MudGrid>
+    <MudItem xs="1">
+        <MudCheckBox @bind-Value="@Answer.IsCorrect" Color="Color.Primary"></MudCheckBox>
+    </MudItem>
+    <MudItem xs="9">
+        <MudTextField @bind-Value="Answer.Text" Label="Answer text" Variant="MudBlazor.Variant.Outlined" AutoGrow>
+        </MudTextField>
+    </MudItem>
+    <MudItem xs="1">
+        <MudIconButton Icon="@Icons.Material.Filled.Delete" OnClick="DeleteAsync"></MudIconButton>
+    </MudItem>
+    <MudItem xs="1">
+        <MudIcon Icon="@Icons.Material.Filled.DragIndicator" Title="Drag" Class="drag-handle-answer" Style="cursor:grab" />
+    </MudItem>
+</MudGrid>
+
+@code {
+    [Parameter, AllowNull]
+    public Models.Answer Answer { get; set; }
+
+    [Parameter]
+    public EventCallback<Models.Answer> OnDeleteAsync { get; set; }
+
+    private async Task DeleteAsync() =>
+        await OnDeleteAsync.InvokeAsync(Answer);
+
+}

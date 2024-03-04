@@ -1,5 +1,86 @@
-﻿<h3>QuizEditable</h3>
+﻿@using System.Text.Json
+@using QuizCrafter.ModularComponents.Abstraction
+@using QuizCrafter.Web.Common.ModularComponents
+@using QuizCrafter.Web.Quiz.Models
 
-@code {
+<MudItem xs="12" sm="10">
+    <MudGrid Justify="Justify.Center">
+        <MudItem xs="12">
+            <MudGrid Justify="Justify.Center">
+                <MudItem xs="1" />
+                <MudItem xs="8" md="4">
+                    <MudTextField @bind-Value="quiz.Title" Label="Quiz name" Variant="MudBlazor.Variant.Outlined" AutoGrow></MudTextField>
+                 </MudItem>
+                 <SortableList Id="sortable" Group="cloning" Pull="clone" Items="quiz?.Questions" OnUpdate="@SortList" Context="question" Handle=".drag-handle-question" OnAdd="AddComponent" Class="mud-grid mud-grid-item mud-grid-item-xs-12">
+                     <SortableItemTemplate>
+                         <MudGrid Justify="Justify.FlexEnd" Spacing="0" Class="mt-3">
+                             <MudItem xs="1">
+                                 <MudIconButton Icon="@Icons.Material.Filled.Close" Title="Delete" OnClick="()=>DeleteQuestion(question)" Style="padding-top:5px; padding-bottom:0"></MudIconButton>
+                             </MudItem>
+                             <MudItem xs="12">
+                                 <DynamicComponent Type="ModularComponentsDefinitionCollection.GetTypeDefinitionForomModel(question).EditComponentType" Parameters="ModularComponentsDefinitionCollection.GetTypeDefinitionForomModel(question).GetParameterDictionary(question)"></DynamicComponent>
+                             </MudItem>
+                         </MudGrid>
+                     </SortableItemTemplate>
+                 </SortableList>
+             </MudGrid>
+
+             <MudButton OnClick="()=>CreateQuizAsync()">Create quiz</MudButton>
+         </MudItem>
+     </MudGrid>
+ </MudItem>
+
+ @code {
+    QuizModel quiz = new();
+
+    protected async override Task OnInitializedAsync()
+    {
+
+    }
+
+    private void DeleteQuestion(IModularComponentModel componentModel)
+    {
+        quiz.RemoveQuestion(componentModel.Id);
+    }
+
+    private async Task CreateQuizAsync()
+    {
+    }
+
+    private void SortList((int oldIndex, int newIndex) indices)
+    {
+        // deconstruct the tuple
+        var (oldIndex, newIndex) = indices;
+
+        var items = quiz.Questions.ToList();
+        var itemToMove = items[oldIndex];
+        items.RemoveAt(oldIndex);
+
+        if (newIndex < items.Count)
+        {
+            items.Insert(newIndex, itemToMove);
+        }
+        else
+        {
+            items.Add(itemToMove);
+        }
+
+        StateHasChanged();
+    }
+
+    bool open = true;
+
+    void ToggleDrawer()
+    {
+        open = !open;
+    }
+
+    private void AddComponent((int oldIndex, int newIndex) indices)
+    {
+        var item = ModularComponentsDefinitionCollection.Instances[indices.oldIndex];
+        quiz.AddQuestion(item.CreateModel());
+
+        StateHasChanged();
+    }
 
 }
