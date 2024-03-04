@@ -1,33 +1,31 @@
 ﻿@using MudBlazor
+@using QuizCrafter.Shared.Components
 
     <MudGrid Justify="Justify.Center">
         <MudItem xs="10">
-            <MudCard Class="primary mt-5 rounded" Elevation="4">
+            <MudCard Class="primary rounded" Elevation="4">
                 <MudIcon Icon="@Icons.Material.Filled.DragIndicator" Title="Drag" Class="drag-handle-question" Style="cursor:grab" />
                 <MudCardHeader>
                     <CardHeaderContent>
-                        <MudText Typo="Typo.h6">Question @Question.Order/@QuestionsCount</MudText>
+                        <MudText Typo="Typo.h6">Question number #@Question.Order</MudText>
                             <MudTextField @bind-Value="Question.Text" Label="Question text" Variant="MudBlazor.Variant.Outlined"   
                     AutoGrow
                          ></MudTextField>
                      </CardHeaderContent>
                      <CardHeaderActions>
-                         @DeleteAction
-                        <MudIconButton Icon="@Icons.Material.Filled.Delete" ></MudIconButton>
                     </CardHeaderActions>
                 </MudCardHeader>
                 <MudCardContent>
                     <MudGrid>
-                      @*   <SortableList Id="@SortableHtmlId" Items="Question?.Answers" OnUpdate="@SortList" Handle=".drag-handle-answer" Context="answer" Class="mud-grid-item mud-grid-item-xs-12">
+                        <SortableList Id="@SortableHtmlId" Items="Question?.Answers" OnUpdate="@SortList" Handle=".drag-handle-answer" Context="answer" Class="mud-grid-item mud-grid-item-xs-12">
                             <SortableItemTemplate>
                                 <AnswerEditable Answer="answer" OnDeleteAsync="DeleteAnswer"></AnswerEditable>
                             </SortableItemTemplate>
-                        </SortableList> *@
+                        </SortableList>
                     </MudGrid>
                 </MudCardContent>
                 <MudCardActions>
-                    @Actions
-                                 <MudButton OnClick="()=>AddAnswer()" Variant="MudBlazor.Variant.Text" Color="Color.Primary">Add answer</MudButton> <MudSpacer /> <MudButton Variant="MudBlazor.Variant.Text" Color="Color.Primary">Submit</MudButton>
+                     <MudButton OnClick="()=>AddAnswer()" Variant="MudBlazor.Variant.Text" Color="Color.Primary">Add answer</MudButton> <MudSpacer />
 
                 </MudCardActions>
             </MudCard>
@@ -40,21 +38,8 @@
     [Parameter]
     public Models.Question Question { get; set; }
 
-    [Parameter]
-    public int QuestionsCount { get; set; }
-
-    [Parameter]
-    public RenderFragment Actions { get; set; }
-
-    [Parameter]
-    public RenderFragment DeleteAction { get; set; }
-
-    [Parameter]
-    public bool DisplayAsIcon { get; set; }
-
     public void DeleteAnswer(Models.Answer answer)
     {
-        //delete answer
     }
 
     private void SortList((int oldIndex, int newIndex) indices)

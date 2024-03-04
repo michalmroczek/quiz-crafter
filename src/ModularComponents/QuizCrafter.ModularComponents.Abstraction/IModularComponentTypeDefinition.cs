@@ -4,7 +4,9 @@
     {
         public Type EditComponentType { get; }
 
-        public Type IconComponentType { get; }
+        public string DisplayName { get; }
+
+        public string Icon { get; }
 
         public Type ModelType { get; }
 

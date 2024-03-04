@@ -1,4 +1,5 @@
-﻿using QuizCrafter.ModularComponents.Abstraction;
+﻿using MudBlazor;
+using QuizCrafter.ModularComponents.Abstraction;
 using QuizCrafter.ModularComponents.MultiChoiceQuestion.Presentation.Components;
 using QuizCrafter.ModularComponents.MultiChoiceQuestion.Presentation.Models;
 
@@ -6,11 +7,13 @@ namespace QuizCrafter.ModularComponents.MultiChoiceQuestion.Presentation
 {
     public class MultiChoiceQuestionComponentDefinition : IModularComponentTypeDefinition
     {
+        public string DisplayName => "Multi choice question";
+
         public Type EditComponentType => typeof(QuestionEditable);
 
-        public Type IconComponentType => typeof(QuestionIcon);
-
         public Type ModelType => typeof(Question);
+
+        public string Icon => Icons.Material.Filled.Quiz;
 
         public IModularComponentModel CreateModel()
         {

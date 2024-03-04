@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizCrafter.ModularComponen
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bootstrapper", "Bootstrapper", "{8FB73BB7-51D1-4834-8226-F0B410D94629}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizCrafter.ModularComponents.Bootstrapper", "src\Bootstrapper\QuizCrafter.ModularComponents.Bootstrapper\QuizCrafter.ModularComponents.Bootstrapper.csproj", "{2CF889A9-C5B7-4532-A41C-71D5163032D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizCrafter.ModularComponents.Bootstrapper", "src\Bootstrapper\QuizCrafter.ModularComponents.Bootstrapper\QuizCrafter.ModularComponents.Bootstrapper.csproj", "{2CF889A9-C5B7-4532-A41C-71D5163032D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
