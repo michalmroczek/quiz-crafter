@@ -33,16 +33,19 @@ export function init(id, group, pull, put, sort, handle, filter, component, forc
             component.invokeMethodAsync('OnRemoveJS', event.oldDraggableIndex, event.newDraggableIndex);
         },
         onAdd: (event) => {
-            console.log(event);
             component.invokeMethodAsync('OnAddJS', event.oldDraggableIndex, event.newDraggableIndex);
         },
+        onStart: (event) => {
+            var myDiv = document.querySelector(".drop-zone");
+            myDiv.style.border = "5px dashed purple";
+            component.invokeMethodAsync('OnEndJS', event.newDraggableIndex);
+        },
         onEnd: (event) => {
-            console.log(event);
-
+            var myDiv = document.querySelector(".drop-zone");
+            myDiv.style.border = "";
             component.invokeMethodAsync('OnEndJS', event.newDraggableIndex);
         },
         onClone: (event) => {
-            console.log(event);
 
             component.invokeMethodAsync('OnCloneJS', event.newDraggableIndex);
         },
