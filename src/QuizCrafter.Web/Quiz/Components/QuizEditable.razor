@@ -7,13 +7,16 @@
     <MudGrid Justify="Justify.Center">
         <MudItem xs="12">
             <MudGrid Justify="Justify.Center">
-                <MudItem xs="1" />
-                <MudItem xs="8" md="4">
-                    <MudTextField @bind-Value="quiz.Title" Label="Quiz name" Variant="MudBlazor.Variant.Outlined" AutoGrow></MudTextField>
+                <MudItem xs="10">
+                    <MudTextField @bind-Value="quiz.Title" Label="Quiz name" Variant="MudBlazor.Variant.Outlined" S AutoGrow></MudTextField>
                  </MudItem>
-                 <SortableList Id="sortable" Group="cloning" Pull="clone" Items="quiz?.Questions" OnUpdate="@SortList" Context="question" Handle=".drag-handle-question" OnAdd="AddComponent" Class="mud-grid mud-grid-item mud-grid-item-xs-12">
+                 <SortableList Id="sortable" Group="cloning" Pull="clone" Items="quiz?.Questions" OnUpdate="@SortList" Context="question" Handle=".drag-handle-question" OnAdd="AddComponent" Class="mud-grid mud-grid-item mud-grid-item-xs-12 drop-zone sortable-list">
                      <SortableItemTemplate>
                          <MudGrid Justify="Justify.FlexEnd" Spacing="0" Class="mt-3">
+                             <MudItem xs="1">
+                             <MudIcon Icon="@Icons.Material.Filled.DragIndicator" Title="Drag" Class="drag-handle-question" Style="cursor:grab" />
+                             </MudItem>
+                             <MudSpacer/>
                              <MudItem xs="1">
                                  <MudIconButton Icon="@Icons.Material.Filled.Close" Title="Delete" OnClick="()=>DeleteQuestion(question)" Style="padding-top:5px; padding-bottom:0"></MudIconButton>
                              </MudItem>

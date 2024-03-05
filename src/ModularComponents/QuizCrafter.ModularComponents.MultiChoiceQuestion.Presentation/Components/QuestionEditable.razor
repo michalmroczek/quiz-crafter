@@ -4,10 +4,9 @@
     <MudGrid Justify="Justify.Center">
         <MudItem xs="10">
             <MudCard Class="primary rounded" Elevation="4">
-                <MudIcon Icon="@Icons.Material.Filled.DragIndicator" Title="Drag" Class="drag-handle-question" Style="cursor:grab" />
                 <MudCardHeader>
                     <CardHeaderContent>
-                        <MudText Typo="Typo.h6">Question number #@Question.Order</MudText>
+                        <MudText Typo="Typo.caption">Question number #@Question.Order</MudText>
                             <MudTextField @bind-Value="Question.Text" Label="Question text" Variant="MudBlazor.Variant.Outlined"   
                     AutoGrow
                          ></MudTextField>
