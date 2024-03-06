@@ -1,0 +1,6 @@
+@QuizCrafter.Modules.Quizzes.Api_HostAddress = http://localhost:5033
+
+GET {{QuizCrafter.Modules.Quizzes.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
