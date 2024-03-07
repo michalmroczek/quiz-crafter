@@ -16,7 +16,7 @@
                 </MudCardHeader>
                 <MudCardContent>
                     <MudGrid>
-                        <SortableList Id="@SortableHtmlId" Items="Question?.Answers" OnUpdate="@SortList" Handle=".drag-handle-answer" Context="answer" Class="mud-grid-item mud-grid-item-xs-12">
+                        <SortableList Id="@SortableHtmlId" Put=false Items="Question?.Answers" OnUpdate="@SortList" Handle=".drag-handle-answer" Context="answer" Class="mud-grid-item mud-grid-item-xs-12">
                             <SortableItemTemplate>
                                 <AnswerEditable Answer="answer" OnDeleteAsync="DeleteAnswer"></AnswerEditable>
                             </SortableItemTemplate>
