@@ -1,11 +1,13 @@
 ﻿@using QuizCrafter.Web.Common.ModularComponents
 @using QuizCrafter.Shared.Components
+@using QuizCrafter.Web.Services
+@inject ModularComponentProvider mcp
 
 <MudDrawer @bind-Open="@open" DisableOverlay="true" Elevation="1" Variant="@DrawerVariant.Temporary" ClipMode="DrawerClipMode.Always" Anchor="Anchor.Right" Style="--mud-drawer-width:300px;">
      <MudDrawerHeader>
          <MudText Typo="Typo.h6">Drag and drop elements</MudText>
      </MudDrawerHeader>
-    <SortableList Id="drawer" Group="cloning" Pull="clone" Class="d-flex mud-width-full" Items="ModularComponentsDefinitionCollection.Instances" Context="definitionType" Sort="false">
+    <SortableList Id="drawer" Group="cloning" Pull="clone" Class="d-flex mud-width-full" Items="mcp.Instances" Context="definitionType" Sort="false">
              <SortableItemTemplate>
             <IconTemplate Icon="@definitionType.Icon" Name="@definitionType.DisplayName"></IconTemplate>
              </SortableItemTemplate>

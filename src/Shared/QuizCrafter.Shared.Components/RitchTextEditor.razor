@@ -1,0 +1,109 @@
+﻿@using Blazored.TextEditor
+@using Microsoft.JSInterop
+@inject IJSRuntime JS
+
+<BlazoredTextEditor @ref="@QuillHtml" DebugLevel="error" Placeholder="Test" >
+    <ToolbarContent>
+        <span class="ql-formats">
+            <select class="ql-font"></select>
+            <select class="ql-size"></select>
+        </span>
+        <span class="ql-formats">
+            <button class="ql-bold"></button>
+            <button class="ql-italic"></button>
+            <button class="ql-underline"></button>
+            <button class="ql-strike"></button>
+        </span>
+        <span class="ql-formats">
+            <select class="ql-color"></select>
+            <select class="ql-background"></select>
+        </span>
+        <span class="ql-formats">
+            <button class="ql-script" value="sub"></button>
+            <button class="ql-script" value="super"></button>
+        </span>
+        <span class="ql-formats">
+            <button class="ql-header" value="1"></button>
+            <button class="ql-header" value="2"></button>
+            <button class="ql-blockquote"></button>
+            <button class="ql-code-block"></button>
+        </span>
+        <span class="ql-formats">
+            <button class="ql-list" value="ordered"></button>
+            <button class="ql-list" value="bullet"></button>
+            <button class="ql-indent" value="-1"></button>
+            <button class="ql-indent" value="+1"></button>
+        </span>
+        <span class="ql-formats">
+            <button class="ql-direction" value="rtl"></button>
+            <select class="ql-align"></select>
+        </span>
+        <span class="ql-formats">
+            <button class="ql-link"></button>
+            <button class="ql-image"></button>
+            <button class="ql-video"></button>
+            <button class="ql-formula"></button>
+        </span>
+        <span class="ql-formats">
+            <button class="ql-clean"></button>
+        </span>
+        <span class="ql-formats">
+            <button>mybutton</button>
+        </span>
+    </ToolbarContent>
+    <EditorContent>
+        <h4>This Toolbar works with HTML</h4>
+        <a href="http://BlazorHelpWebsite.com">
+            BlazorHelpWebsite.com
+        </a>
+    </EditorContent>
+</BlazoredTextEditor>
+<br />
+<button class="btn btn-primary"
+        @onclick="GetHTML">
+    Get HTML
+</button>
+<button class="btn btn-primary"
+        @onclick="SetHTML">
+    Set HTML
+</button>
+<br />
+<div>
+    <br />
+    @((MarkupString)QuillHTMLContent)
+    @QuillHTMLContent
+</div>
+@QuillHTMLContent
+@Text
+<br />
+
+@code {
+
+    BlazoredTextEditor QuillHtml;
+    string QuillHTMLContent;
+    string Text;
+    public async void GetHTML()
+    {
+        QuillHTMLContent = await this.QuillHtml.GetHTML();
+        Text = await QuillHtml.GetText();
+        StateHasChanged();
+    }
+
+    public async void SetHTML()
+    {
+        string QuillContent =
+            @"<a href='http://BlazorHelpWebsite.com/'>" +
+            "<img src='images/BlazorHelpWebsite.gif' /></a>";
+
+        await this.QuillHtml.LoadHTMLContent(QuillContent);
+        StateHasChanged();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+          //  var sortableImport = await JS.InvokeAsync<IJSObjectReference>("import", "./_content/QuizCrafter.Shared.Components/scripts/quill.min.js");
+        }
+    }
+}

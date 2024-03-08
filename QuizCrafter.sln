@@ -23,9 +23,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{F62F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Quizzes", "Quizzes", "{6E29B1EC-595C-413D-8D7B-65F25C284CD6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizCrafter.Modules.Quizzes.Api", "src\Modules\Quizzes\QuizCrafter.Modules.Quizzes.Api\QuizCrafter.Modules.Quizzes.Api.csproj", "{55E23A4B-666B-486B-8374-C132F96CF0DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizCrafter.Modules.Quizzes.Api", "src\Modules\Quizzes\QuizCrafter.Modules.Quizzes.Api\QuizCrafter.Modules.Quizzes.Api.csproj", "{55E23A4B-666B-486B-8374-C132F96CF0DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizCrafter.ModularComponents.FillInTheBlanks.Presentation", "src\ModularComponents\QuizCrafter.ModularComponents.FillInTheBlanks.Presentation\QuizCrafter.ModularComponents.FillInTheBlanks.Presentation.csproj", "{0D224B84-A4C9-4EDC-919F-5D0540A85164}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizCrafter.ModularComponents.FillInTheBlanks.Presentation", "src\ModularComponents\QuizCrafter.ModularComponents.FillInTheBlanks.Presentation\QuizCrafter.ModularComponents.FillInTheBlanks.Presentation.csproj", "{0D224B84-A4C9-4EDC-919F-5D0540A85164}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

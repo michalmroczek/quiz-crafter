@@ -1,12 +1,29 @@
-﻿using System.Reflection;
-using QuizCrafter.ModularComponents.Abstraction;
+﻿using QuizCrafter.ModularComponents.Abstraction;
+using System.Reflection;
 
-namespace QuizCrafter.ModularComponents.Bootstrapper
+namespace QuizCrafter.Web.Services
 {
-    internal static class Bootrapper
+    public class ModularComponentProvider
     {
+        private IReadOnlyList<IModularComponentTypeDefinition> _instances;
+        private IList<Assembly> _assemblies;
+        private IReadOnlyList<IModularComponentTypeDefinition> GetInstances()
+        {
+            if (_instances == null)
+            {
+                _assemblies ??= LoadAssemblies();
 
-        public static IList<Assembly> LoadAssemblies()
+                _instances = LoadComponents(_assemblies);
+            }
+            return _instances;
+        }
+
+        public IReadOnlyList<IModularComponentTypeDefinition> Instances => GetInstances();
+
+        public IModularComponentTypeDefinition GetTypeDefinitionForomModel(IModularComponentModel model) => Instances.Where(q => q.ModelType == model.GetType()).FirstOrDefault();
+
+
+        private IList<Assembly> LoadAssemblies()
         {
             const string modulePart = "QuizCrafter.ModularComponents.*";
             var assemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
@@ -39,3 +56,4 @@ namespace QuizCrafter.ModularComponents.Bootstrapper
         .ToList();
     }
 }
+
