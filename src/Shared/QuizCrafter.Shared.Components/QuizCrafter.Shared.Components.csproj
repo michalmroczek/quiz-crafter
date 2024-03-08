@@ -13,6 +13,8 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.0" />
+	  <PackageReference Include="Blazored.TextEditor" Version="1.1.0" />
+
   </ItemGroup>
 
 </Project>

@@ -7,7 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ModularComponents\QuizCrafter.ModularComponents.MultiChoiceQuestion.Presentation\QuizCrafter.ModularComponents.MultiChoiceQuestion.Presentation.csproj" />
+	  <ProjectReference Include="..\..\ModularComponents\QuizCrafter.ModularComponents.MultiChoiceQuestion.Presentation\QuizCrafter.ModularComponents.MultiChoiceQuestion.Presentation.csproj" />
+	  <ProjectReference Include="..\..\ModularComponents\QuizCrafter.ModularComponents.FillInTheBlanks.Presentation\QuizCrafter.ModularComponents.FillInTheBlanks.Presentation.csproj" />
   </ItemGroup>
 
 </Project>

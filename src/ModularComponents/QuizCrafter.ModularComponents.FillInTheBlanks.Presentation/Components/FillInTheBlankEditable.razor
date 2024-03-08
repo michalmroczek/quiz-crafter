@@ -1,12 +1,12 @@
 ﻿@using QuizCrafter.Shared.Components
-Text 
 
+<RitchTextEditor></RitchTextEditor>
 @* <SortableList  Group="fillInTheBlanks" Put=false ></SortableList> *@
 <MudChip Color="Color.Default" OnClose="Remove">ABC</MudChip>
 
 @code {
-
-
+    [Parameter]
+    public Models.FillInTheBlanksModel FillInTheBlanksModel { get; set; }
 
     private void Remove()
     {

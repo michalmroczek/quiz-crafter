@@ -2,7 +2,8 @@
 @using QuizCrafter.ModularComponents.Abstraction
 @using QuizCrafter.Web.Common.ModularComponents
 @using QuizCrafter.Web.Quiz.Models
-
+@using QuizCrafter.Web.Services
+@inject ModularComponentProvider mcp
 <MudItem xs="12" sm="10">
     <MudGrid Justify="Justify.Center">
         <MudItem xs="12">
@@ -21,7 +22,7 @@
                                  <MudIconButton Icon="@Icons.Material.Filled.Close" Title="Delete" OnClick="()=>DeleteQuestion(question)" Style="padding-top:5px; padding-bottom:0"></MudIconButton>
                              </MudItem>
                              <MudItem xs="12">
-                                 <DynamicComponent Type="ModularComponentsDefinitionCollection.GetTypeDefinitionForomModel(question).EditComponentType" Parameters="ModularComponentsDefinitionCollection.GetTypeDefinitionForomModel(question).GetParameterDictionary(question)"></DynamicComponent>
+                                 <DynamicComponent Type="mcp.GetTypeDefinitionForomModel(question).EditComponentType" Parameters="mcp.GetTypeDefinitionForomModel(question).GetParameterDictionary(question)"></DynamicComponent>
                              </MudItem>
                          </MudGrid>
                      </SortableItemTemplate>
@@ -80,7 +81,7 @@
 
     private void AddComponent((int oldIndex, int newIndex) indices)
     {
-        var item = ModularComponentsDefinitionCollection.Instances[indices.oldIndex];
+        var item = mcp.Instances[indices.oldIndex];
         quiz.AddQuestion(item.CreateModel());
 
         StateHasChanged();
