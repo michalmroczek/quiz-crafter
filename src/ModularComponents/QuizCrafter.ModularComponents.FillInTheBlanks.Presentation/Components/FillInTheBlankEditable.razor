@@ -1,12 +1,50 @@
 ﻿@using QuizCrafter.Shared.Components
-
-<RitchTextEditor></RitchTextEditor>
+@inject IDialogService DialogService
+<MudPaper Elevation="3">
+    <RitchTextEditor OnAddAnswer="OnAddAnswer"></RitchTextEditor>
 @* <SortableList  Group="fillInTheBlanks" Put=false ></SortableList> *@
-<MudChip Color="Color.Default" OnClose="Remove">ABC</MudChip>
-
+    @foreach (var blanks in FillInTheBlanksModel.textWithBlanks.Select(t=>t.BlankAnswer))
+    {
+        <MudChip Color="Color.Default" OnClose="Remove">@blanks.Answer</MudChip>
+    }
+    
+</MudPaper>
 @code {
     [Parameter]
     public Models.FillInTheBlanksModel FillInTheBlanksModel { get; set; }
+
+    protected override void OnInitialized()
+    {
+        FillInTheBlanksModel = new()
+            {
+                textWithBlanks = new List<Models.TextWithBlank>()
+                {
+                    new Models.TextWithBlank()
+                    {
+                        Text="Aasdokaodf lad kand ksdfkn",
+                        BlankAnswer = new Models.BlankAnswer()
+                        {
+                            Answer = "Test"
+                        }
+                    },
+
+                     new Models.TextWithBlank()
+                    {
+                        Text="Aasdokaodf lad kand ksdfkn",
+                        BlankAnswer = new Models.BlankAnswer()
+                        {
+                            Answer = "Test2"
+                        }
+                    }
+                }
+            };
+    }
+
+    public void OnAddAnswer()
+    {
+        var options = new DialogOptions { CloseOnEscapeKey = true };
+        DialogService.Show<AddAnswerDialog>("Simple Dialog", options);
+    }
 
     private void Remove()
     {

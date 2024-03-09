@@ -48,7 +48,7 @@
             <button class="ql-clean"></button>
         </span>
         <span class="ql-formats">
-            <button>mybutton</button>
+            <button onclick="@AddAnswer">add the gap</button>
         </span>
     </ToolbarContent>
     <EditorContent>
@@ -78,6 +78,10 @@
 <br />
 
 @code {
+    [Parameter]
+    public EventCallback OnAddAnswer { get; set; }
+
+    private void AddAnswer() => OnAddAnswer.InvokeAsync();
 
     BlazoredTextEditor QuillHtml;
     string QuillHTMLContent;
