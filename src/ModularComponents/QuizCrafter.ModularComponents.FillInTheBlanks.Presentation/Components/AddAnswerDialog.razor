@@ -1,0 +1,15 @@
+﻿<MudDialog>
+    <DialogContent>
+        <MudTextField @bind-Value="AnswerValue" Label="Quiz name" Variant="MudBlazor.Variant.Outlined" AutoGrow></MudTextField>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Primary" OnClick="Submit">Ok</MudButton>
+    </DialogActions>
+</MudDialog>
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    string AnswerValue;
+    void Submit() => MudDialog.Close(DialogResult.Ok(true));
+    void Cancel() => MudDialog.Cancel();
+}

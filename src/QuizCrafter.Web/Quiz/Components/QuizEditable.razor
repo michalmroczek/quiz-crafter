@@ -9,7 +9,7 @@
         <MudItem xs="12">
             <MudGrid Justify="Justify.Center">
                 <MudItem xs="10">
-                    <MudTextField @bind-Value="quiz.Title" Label="Quiz name" Variant="MudBlazor.Variant.Outlined" S AutoGrow></MudTextField>
+                    <MudTextField @bind-Value="quiz.Title" Label="Quiz name" Variant="MudBlazor.Variant.Outlined"  AutoGrow></MudTextField>
                  </MudItem>
                  <SortableList Id="sortable" Group="cloning" Pull="clone" Items="quiz?.Questions" OnUpdate="@SortList" Context="question" Handle=".drag-handle-question" OnAdd="AddComponent" Class="mud-grid mud-grid-item mud-grid-item-xs-12 drop-zone sortable-list">
                      <SortableItemTemplate>
