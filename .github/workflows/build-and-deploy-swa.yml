@@ -1,14 +1,14 @@
-name: Azure Static Web Apps CI/CD Release
+name: Azure Static Web Apps CI/CD
 
 on:
   workflow_dispatch:
-#  push:
-#    branches:
-#     - main
- # pull_request:
- #  types: [opened, synchronize, reopened, closed]
- #  branches:
- #     - main
+  push:
+   branches:
+    - main
+  pull_request:
+   types: [opened, synchronize, reopened, closed]
+   branches:
+     - main
 
 jobs:
   build_and_deploy_job:
@@ -24,19 +24,19 @@ jobs:
         with:
           files: './src/web/wwwroot/appsettings.json'
         env:
-          AzureAd.ClientId: ${{ vars.CLIENTID_RELEASE }}
+          AzureAd.ClientId: ${{ vars.CLIENTID }}
           AzureAd.Authority: ${{ vars.AUTHORITY }}
 
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_NICE_GRASS_01CC21803 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
           action: "upload"
           ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
-          app_location: "src/web" # App source code path
+          app_location: "src/QuizCrafter.Web" # App source code path
           #api_location: "src/api" # Api source code path - optional
           output_location: "wwwroot" # Built app content directory - optional
           deployment_environment: "production"
@@ -51,5 +51,5 @@ jobs:
         id: closepullrequest
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_NICE_GRASS_01CC21803 }}
           action: "close"

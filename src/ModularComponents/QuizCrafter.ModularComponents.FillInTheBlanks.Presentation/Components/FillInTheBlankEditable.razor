@@ -3,7 +3,7 @@
 <MudPaper Elevation="3">
     <RitchTextEditor OnAddAnswer="OnAddAnswer"></RitchTextEditor>
 @* <SortableList  Group="fillInTheBlanks" Put=false ></SortableList> *@
-    @foreach (var blanks in FillInTheBlanksModel.textWithBlanks.Select(t=>t.BlankAnswer))
+    @foreach (var blanks in FillInTheBlanksModel.textWithBlanks?.Select(t=>t.BlankAnswer))
     {
         <MudChip Color="Color.Default" OnClose="Remove">@blanks.Answer</MudChip>
     }
@@ -11,7 +11,7 @@
 </MudPaper>
 @code {
     [Parameter]
-    public Models.FillInTheBlanksModel FillInTheBlanksModel { get; set; }
+    public Models.FillInTheBlanksModel FillInTheBlanksModel { get; set; } = new();
 
     protected override void OnInitialized()
     {

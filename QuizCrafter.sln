@@ -17,8 +17,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizCrafter.ModularComponen
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bootstrapper", "Bootstrapper", "{8FB73BB7-51D1-4834-8226-F0B410D94629}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizCrafter.ModularComponents.Bootstrapper", "src\Bootstrapper\QuizCrafter.ModularComponents.Bootstrapper\QuizCrafter.ModularComponents.Bootstrapper.csproj", "{2CF889A9-C5B7-4532-A41C-71D5163032D0}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{F62F9B28-00D9-4034-ADE3-8539969E6482}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Quizzes", "Quizzes", "{6E29B1EC-595C-413D-8D7B-65F25C284CD6}"
@@ -26,6 +24,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizCrafter.Modules.Quizzes.Api", "src\Modules\Quizzes\QuizCrafter.Modules.Quizzes.Api\QuizCrafter.Modules.Quizzes.Api.csproj", "{55E23A4B-666B-486B-8374-C132F96CF0DC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizCrafter.ModularComponents.FillInTheBlanks.Presentation", "src\ModularComponents\QuizCrafter.ModularComponents.FillInTheBlanks.Presentation\QuizCrafter.ModularComponents.FillInTheBlanks.Presentation.csproj", "{0D224B84-A4C9-4EDC-919F-5D0540A85164}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizCrafter.ModularComponents.PlaceInCorrectOrder.Presentation", "src\ModularComponents\QuizCrafter.ModularComponents.PlaceInCorrectOrder.Presentation\QuizCrafter.ModularComponents.PlaceInCorrectOrder.Presentation.csproj", "{F89BBA62-169F-4D31-92C4-29E3EB0E4E30}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,10 +49,6 @@ Global
 		{479B8360-C2B8-4FBD-9725-DD8FE9C2DC7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{479B8360-C2B8-4FBD-9725-DD8FE9C2DC7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{479B8360-C2B8-4FBD-9725-DD8FE9C2DC7B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2CF889A9-C5B7-4532-A41C-71D5163032D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2CF889A9-C5B7-4532-A41C-71D5163032D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2CF889A9-C5B7-4532-A41C-71D5163032D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2CF889A9-C5B7-4532-A41C-71D5163032D0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{55E23A4B-666B-486B-8374-C132F96CF0DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{55E23A4B-666B-486B-8374-C132F96CF0DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55E23A4B-666B-486B-8374-C132F96CF0DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -61,6 +57,10 @@ Global
 		{0D224B84-A4C9-4EDC-919F-5D0540A85164}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D224B84-A4C9-4EDC-919F-5D0540A85164}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D224B84-A4C9-4EDC-919F-5D0540A85164}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F89BBA62-169F-4D31-92C4-29E3EB0E4E30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F89BBA62-169F-4D31-92C4-29E3EB0E4E30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F89BBA62-169F-4D31-92C4-29E3EB0E4E30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F89BBA62-169F-4D31-92C4-29E3EB0E4E30}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,10 +69,10 @@ Global
 		{7CC82D26-C304-46AB-919E-CA9137D737AB} = {45F07D38-849F-47C9-92C8-0046E2204A29}
 		{CC575A41-CA72-4E7F-8C0F-EB1A17DE110B} = {90D5E1E9-A0BE-4BA3-80E5-D74352DECE36}
 		{479B8360-C2B8-4FBD-9725-DD8FE9C2DC7B} = {90D5E1E9-A0BE-4BA3-80E5-D74352DECE36}
-		{2CF889A9-C5B7-4532-A41C-71D5163032D0} = {8FB73BB7-51D1-4834-8226-F0B410D94629}
 		{6E29B1EC-595C-413D-8D7B-65F25C284CD6} = {F62F9B28-00D9-4034-ADE3-8539969E6482}
 		{55E23A4B-666B-486B-8374-C132F96CF0DC} = {6E29B1EC-595C-413D-8D7B-65F25C284CD6}
 		{0D224B84-A4C9-4EDC-919F-5D0540A85164} = {90D5E1E9-A0BE-4BA3-80E5-D74352DECE36}
+		{F89BBA62-169F-4D31-92C4-29E3EB0E4E30} = {90D5E1E9-A0BE-4BA3-80E5-D74352DECE36}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2D618763-F8C8-407A-8B6B-2D3618F42780}
