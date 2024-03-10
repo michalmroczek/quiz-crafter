@@ -6,7 +6,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
   </PropertyGroup>
-
+	<PropertyGroup>
+		<PublishTrimmed>false</PublishTrimmed>
+	</PropertyGroup>
   <ItemGroup>
 	  <PackageReference Include="Blazored.LocalStorage" Version="4.4.0" />
 	  <PackageReference Include="Blazored.TextEditor" Version="1.1.0" />
