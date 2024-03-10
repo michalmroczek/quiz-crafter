@@ -2,7 +2,7 @@
   "$schema": "https://aka.ms/azure/static-web-apps-cli/schema",
   "configurations": {
     "quiz-crafter-web-swa": {
-      "appLocation": ".src/QuizCrafter.Web",
+      "appLocation": "./src/QuizCrafter.Web",
       "outputLocation": "bin\\wwwroot",
       "appBuildCommand": "dotnet publish -c Release -o bin",
       "run": "dotnet watch run",
