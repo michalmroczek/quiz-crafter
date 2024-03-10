@@ -364,3 +364,4 @@ FodyWeavers.xsd
 /.env
 /infra/params.json
 /*.sln.bak
+/src/QuizCrafter.Web/wwwroot/appsettings.development.json
