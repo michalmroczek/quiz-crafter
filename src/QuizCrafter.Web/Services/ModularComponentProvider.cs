@@ -1,4 +1,5 @@
-﻿using QuizCrafter.ModularComponents.Abstraction;
+﻿using Microsoft.AspNetCore.Components.WebAssembly.Services;
+using QuizCrafter.ModularComponents.Abstraction;
 using System.Reflection;
 
 namespace QuizCrafter.Web.Services
@@ -6,47 +7,47 @@ namespace QuizCrafter.Web.Services
     public class ModularComponentProvider
     {
         private IReadOnlyList<IModularComponentTypeDefinition> _instances;
-        private IList<Assembly> _assemblies;
-        private IReadOnlyList<IModularComponentTypeDefinition> GetInstances()
+        private List<Assembly> _assemblies;
+        private readonly LazyAssemblyLoader _lazyAssemblyLoader;
+        public ModularComponentProvider(LazyAssemblyLoader lazyAssemblyLoader)
+        {
+            _lazyAssemblyLoader = lazyAssemblyLoader;
+        }
+
+        public void Initialize(IEnumerable<Assembly> assemblies)
+        {
+            _assemblies = assemblies.ToList();
+            _instances = LoadComponents(_assemblies);
+        }
+
+        public async Task<IReadOnlyList<IModularComponentTypeDefinition>> GetInstances()
         {
             if (_instances == null)
             {
-                _assemblies ??= LoadAssemblies();
+                if (_assemblies is null) { await LoadAssemblies(); }
 
                 _instances = LoadComponents(_assemblies);
             }
+
             return _instances;
         }
 
-        public IReadOnlyList<IModularComponentTypeDefinition> Instances => GetInstances();
+        public IReadOnlyList<IModularComponentTypeDefinition> Instances => _instances;
 
-        public IModularComponentTypeDefinition GetTypeDefinitionForomModel(IModularComponentModel model) => Instances.Where(q => q.ModelType == model.GetType()).FirstOrDefault();
+        public IModularComponentTypeDefinition GetTypeDefinitionForomModel(IModularComponentModel model) => _instances.Where(q => q.ModelType == model.GetType()).FirstOrDefault();
 
 
-        private IList<Assembly> LoadAssemblies()
+        private async Task LoadAssemblies()
         {
-            const string modulePart = "QuizCrafter.ModularComponents.*";
-            var assemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
-            var locations = assemblies.Where(x => !x.IsDynamic).Select(x => x.Location).ToArray();
-            var files = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, "*.dll")
-                .Where(x => !locations.Contains(x, StringComparer.InvariantCultureIgnoreCase))
-                .ToList();
-
-            foreach (var file in files)
-            {
-                if (!file.Contains(modulePart))
-                {
-                    continue;
-                }
-
-                var moduleName = file.Split(modulePart)[1].Split(".")[0].ToLowerInvariant();
-            }
-
-            files.ForEach(x => assemblies.Add(AppDomain.CurrentDomain.Load(AssemblyName.GetAssemblyName(x))));
-            return assemblies;
+            var assemblies = await _lazyAssemblyLoader.LoadAssembliesAsync(
+            new[] {
+             "QuizCrafter.ModularComponents.MultiChoiceQuestion.Presentation.wasm",
+            "QuizCrafter.ModularComponents.FillInTheBlanks.Presentation.wasm"
+            });
+            _assemblies = assemblies.ToList();
         }
 
-        public static IReadOnlyList<IModularComponentTypeDefinition> LoadComponents(IEnumerable<Assembly> assemblies)
+        public IReadOnlyList<IModularComponentTypeDefinition> LoadComponents(IEnumerable<Assembly> assemblies)
     => assemblies
         .SelectMany(x => x.GetTypes())
         .Where(x => typeof(IModularComponentTypeDefinition).IsAssignableFrom(x) && !x.IsInterface)

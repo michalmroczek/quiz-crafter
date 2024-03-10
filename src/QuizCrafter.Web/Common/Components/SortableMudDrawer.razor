@@ -7,7 +7,7 @@
      <MudDrawerHeader>
          <MudText Typo="Typo.h6">Drag and drop elements</MudText>
      </MudDrawerHeader>
-    <SortableList Id="drawer" Group="cloning" Pull="clone" Class="d-flex mud-width-full" Items="mcp.Instances" Context="definitionType" Sort="false">
+    <SortableList Id="drawer" Group="cloning" Pull="clone" Class="d-flex mud-width-full" Items="modularComponentDefinitions" Context="definitionType" Sort="false">
              <SortableItemTemplate>
             <IconTemplate Icon="@definitionType.Icon" Name="@definitionType.DisplayName"></IconTemplate>
              </SortableItemTemplate>
@@ -23,6 +23,12 @@ else
     <MudIconButton Icon="@Icons.Material.Filled.KeyboardDoubleArrowRight" aria-label="close" Title="close" Style=" position: fixed; top:70px;float:right; right:320px;" OnClick="@(() => ToggleDrawer())"></MudIconButton>
 }
 @code {
+    private IReadOnlyCollection<QuizCrafter.ModularComponents.Abstraction.IModularComponentTypeDefinition> modularComponentDefinitions = new List<QuizCrafter.ModularComponents.Abstraction.IModularComponentTypeDefinition>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        modularComponentDefinitions = await mcp.GetInstances();
+    }
 
     bool open = true;
 

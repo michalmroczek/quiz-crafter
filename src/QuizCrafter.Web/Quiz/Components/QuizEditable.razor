@@ -1,9 +1,13 @@
 ﻿@using System.Text.Json
+@using Microsoft.AspNetCore.Components.WebAssembly.Services
 @using QuizCrafter.ModularComponents.Abstraction
 @using QuizCrafter.Web.Common.ModularComponents
 @using QuizCrafter.Web.Quiz.Models
 @using QuizCrafter.Web.Services
+@using System.Reflection
 @inject ModularComponentProvider mcp
+@inject LazyAssemblyLoader AssemblyLoader
+
 <MudItem xs="12" sm="10">
     <MudGrid Justify="Justify.Center">
         <MudItem xs="12">
@@ -36,11 +40,6 @@
 
  @code {
     QuizModel quiz = new();
-
-    protected async override Task OnInitializedAsync()
-    {
-
-    }
 
     private void DeleteQuestion(IModularComponentModel componentModel)
     {
