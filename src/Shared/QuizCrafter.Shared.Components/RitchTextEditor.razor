@@ -2,7 +2,7 @@
 @using Microsoft.JSInterop
 @inject IJSRuntime JS
 
-<BlazoredTextEditor @ref="@QuillHtml" DebugLevel="error" Placeholder="Test" >
+<BlazoredTextEditor @ref="@QuillHtml" DebugLevel="error" Placeholder="Test"  >
     <ToolbarContent>
         <span class="ql-formats">
             <select class="ql-font"></select>
@@ -90,6 +90,7 @@
     {
         QuillHTMLContent = await this.QuillHtml.GetHTML();
         Text = await QuillHtml.GetText();
+        
         StateHasChanged();
     }
 
