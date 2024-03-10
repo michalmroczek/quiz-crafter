@@ -22,7 +22,7 @@ jobs:
           lfs: false
       - uses: microsoft/variable-substitution@v1 
         with:
-          files: './src/web/wwwroot/appsettings.json'
+          files: './src/QuizCrafter.Web/wwwroot/appsettings.json'
         env:
           AzureAd.ClientId: ${{ vars.CLIENTID }}
           AzureAd.Authority: ${{ vars.AUTHORITY }}
