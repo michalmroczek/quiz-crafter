@@ -6,9 +6,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
   </PropertyGroup>
-	<PropertyGroup>
-		<PublishTrimmed>false</PublishTrimmed>
-	</PropertyGroup>
   <ItemGroup>
 	  <PackageReference Include="Blazored.LocalStorage" Version="4.4.0" />
 	  <PackageReference Include="Blazored.TextEditor" Version="1.1.0" />
@@ -23,6 +20,10 @@
 	<PropertyGroup>
 	  <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
 	</PropertyGroup>
+	<ItemGroup>
+		<BlazorWebAssemblyLazyLoad Include="QuizCrafter.ModularComponents.MultiChoiceQuestion.Presentation.wasm" />
+		<BlazorWebAssemblyLazyLoad Include="QuizCrafter.ModularComponents.FillInTheBlanks.Presentation.wasm" />
+	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\ModularComponents\QuizCrafter.ModularComponents.Abstraction\QuizCrafter.ModularComponents.Abstraction.csproj" />
 	  <ProjectReference Include="..\Shared\QuizCrafter.Shared.Components\QuizCrafter.Shared.Components.csproj" />
