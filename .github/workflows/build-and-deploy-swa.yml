@@ -39,7 +39,6 @@ jobs:
           app_location: "src/QuizCrafter.Web" # App source code path
           #api_location: "src/api" # Api source code path - optional
           output_location: "wwwroot" # Built app content directory - optional
-          deployment_environment: "production"
           ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
