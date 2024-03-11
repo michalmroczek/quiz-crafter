@@ -2,7 +2,7 @@
 using QuizCrafter.ModularComponents.Abstraction;
 using System.Reflection;
 
-namespace QuizCrafter.Web.Services
+namespace QuizCrafter.Web.Services.ModularComponents
 {
     public class ModularComponentProvider
     {
@@ -41,7 +41,7 @@ namespace QuizCrafter.Web.Services
         {
             var assemblies = await _lazyAssemblyLoader.LoadAssembliesAsync(
             new[] {
-             "QuizCrafter.ModularComponents.MultiChoiceQuestion.Presentation.wasm",
+            "QuizCrafter.ModularComponents.MultiChoiceQuestion.Presentation.wasm",
             "QuizCrafter.ModularComponents.FillInTheBlanks.Presentation.wasm"
             });
             _assemblies = assemblies.ToList();
