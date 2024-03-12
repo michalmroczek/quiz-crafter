@@ -3,6 +3,7 @@
 <MudPaper Elevation="3">
     <RitchTextEditor OnAddAnswer="OnAddAnswer"></RitchTextEditor>
 @* <SortableList  Group="fillInTheBlanks" Put=false ></SortableList> *@
+    @if (FillInTheBlanksModel.textWithBlanks?.Select(t => t.BlankAnswer) is not null)
     @foreach (var blanks in FillInTheBlanksModel.textWithBlanks?.Select(t=>t.BlankAnswer))
     {
         <MudChip Color="Color.Default" OnClose="Remove">@blanks.Answer</MudChip>

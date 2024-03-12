@@ -1,4 +1,4 @@
-﻿using QuizCrafter.ModularComponents.Abstraction;
+﻿using QuizCrafter.ModularComponents.Abstraction.Core;
 
 namespace QuizCrafter.Web.Quiz.Models
 {

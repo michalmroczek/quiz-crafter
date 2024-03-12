@@ -1,4 +1,4 @@
-﻿using QuizCrafter.ModularComponents.Abstraction;
+﻿using QuizCrafter.ModularComponents.Abstraction.Core;
 using System.Collections;
 using System.Collections.Generic;
 

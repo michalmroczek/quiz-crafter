@@ -1,4 +1,4 @@
-﻿namespace QuizCrafter.ModularComponents.Abstraction
+﻿namespace QuizCrafter.ModularComponents.Abstraction.Core
 {
     public interface IModularComponentTypeDefinition
     {
