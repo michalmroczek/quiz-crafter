@@ -1,35 +1,41 @@
-﻿@using QuizCrafter.Web.Common.ModularComponents
+﻿@using QuizCrafter.ModularComponents.Abstraction.ComponentLoader
+@using QuizCrafter.ModularComponents.Abstraction.Core
 @using QuizCrafter.Shared.Components
-@using QuizCrafter.Web.Services
-@using QuizCrafter.Web.Services.ModularComponents
 
-@inject ModularComponentProvider mcp
+@inject IModularComponentCollection _modularComponentCollection
 
-<MudDrawer @bind-Open="@open" DisableOverlay="true" Elevation="1" Variant="@DrawerVariant.Temporary" ClipMode="DrawerClipMode.Always" Anchor="Anchor.Right" Style="--mud-drawer-width:300px;">
-     <MudDrawerHeader>
-         <MudText Typo="Typo.h6">Drag and drop elements</MudText>
-     </MudDrawerHeader>
+<MudDrawer @bind-Open="@open" DisableOverlay="true" Elevation="1" Variant="@DrawerVariant.Temporary" ClipMode="DrawerClipMode.Always" Anchor="Anchor.Right" Class="drawer-responsive">
+    <MudDrawerHeader>
+        <MudGrid>
+            <MudItem xs="1">           
+                <MudIconButton Size=Size.Small OnClick="@(() => ToggleDrawer())" Icon="@Icons.Material.Filled.Close"/>
+            </MudItem>
+            <MudItem xs="11">
+                <MudText Typo="Typo.h6">Drag and drop components</MudText>
+            </MudItem>
+        </MudGrid>
+    </MudDrawerHeader>
     <SortableList Id="drawer" Group="cloning" Pull="clone" Class="d-flex mud-width-full" Items="modularComponentDefinitions" Context="definitionType" Sort="false">
-             <SortableItemTemplate>
+        <SortableItemTemplate>
             <IconTemplate Icon="@definitionType.Icon" Name="@definitionType.DisplayName"></IconTemplate>
-             </SortableItemTemplate>
-         </SortableList>
+        </SortableItemTemplate>
+    </SortableList>
 
- </MudDrawer>
- @if(!open)
- {
-    <MudIconButton Icon="@Icons.Material.Filled.KeyboardDoubleArrowLeft" aria-label="open" Title="open" Style=" position: fixed;float:right;  top:70px; right:30px" OnClick="@(() => ToggleDrawer())"></MudIconButton>
+</MudDrawer>
+@if (!open)
+{
+    <MudIconButton Icon="@Icons.Material.Filled.KeyboardDoubleArrowLeft" aria-label="open" Title="open" Style=" position: fixed;float:right;  top:70px; right:10px" OnClick="@(() => ToggleDrawer())"></MudIconButton>
 }
-else
+@* else
 {
     <MudIconButton Icon="@Icons.Material.Filled.KeyboardDoubleArrowRight" aria-label="close" Title="close" Style=" position: fixed; top:70px;float:right; right:320px;" OnClick="@(() => ToggleDrawer())"></MudIconButton>
-}
+} *@
 @code {
-    private IReadOnlyCollection<QuizCrafter.ModularComponents.Abstraction.IModularComponentTypeDefinition> modularComponentDefinitions = new List<QuizCrafter.ModularComponents.Abstraction.IModularComponentTypeDefinition>();
+    private IReadOnlyCollection<IModularComponentTypeDefinition> modularComponentDefinitions = new List<QuizCrafter.ModularComponents.Abstraction.Core.IModularComponentTypeDefinition>();
 
     protected override async Task OnInitializedAsync()
     {
-        modularComponentDefinitions = await mcp.GetInstances();
+        modularComponentDefinitions = await _modularComponentCollection.GetComponents();
     }
 
     bool open = true;

@@ -3,8 +3,8 @@
 
 <AuthorizeView>
     <Authorized>
-        Hello, @context.User.Identity?.Name!
-        <MudIconButton Icon="@Icons.Material.Filled.Person" Color="Color.Primary" />
+        <MudText Typo="Typo.caption">@context.User.Identity?.Name!</MudText>
+        <MudIconButton Size=Size.Small Icon="@Icons.Material.Filled.Person" Color="Color.Primary" />
         <MudButton Variant="MudBlazor.Variant.Outlined" OnClick=BeginLogOut Color="Color.Secondary"> Log out </MudButton>
     </Authorized>
     <NotAuthorized>
@@ -12,7 +12,8 @@
                    Variant="MudBlazor.Variant.Outlined"
                    EndIcon="@Icons.Material.Filled.Login"
                    Color="Color.Secondary"
-                   Style="text-transform:none">
+                   Style="text-transform:none"
+                     Size="Size.Small">
             Log in
         </MudButton>
     </NotAuthorized>

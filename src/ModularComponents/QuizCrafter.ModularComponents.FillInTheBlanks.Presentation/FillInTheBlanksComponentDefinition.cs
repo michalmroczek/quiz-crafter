@@ -1,5 +1,5 @@
 ﻿using MudBlazor;
-using QuizCrafter.ModularComponents.Abstraction;
+using QuizCrafter.ModularComponents.Abstraction.Core;
 using QuizCrafter.ModularComponents.FillInTheBlanks.Presentation.Components;
 using QuizCrafter.ModularComponents.FillInTheBlanks.Presentation.Models;
 
@@ -20,7 +20,7 @@ namespace QuizCrafter.ModularComponents.FillInTheBlanks.Presentation
             return new FillInTheBlanksModel();
         }
 
-        public Dictionary<string, object> GetParameterDictionary(object parameterObject) => new Dictionary<string, object>() { { "FillInTheBlanksModel", parameterObject } };
+        public Dictionary<string, object> GetParameterDictionary(object parameterObject) => new Dictionary<string, object>() { { nameof(FillInTheBlanksModel), parameterObject } };
 
     }
 }

@@ -1,12 +1,11 @@
 ﻿@using System.Text.Json
 @using Microsoft.AspNetCore.Components.WebAssembly.Services
 @using QuizCrafter.ModularComponents.Abstraction
-@using QuizCrafter.Web.Common.ModularComponents
+@using QuizCrafter.ModularComponents.Abstraction.ComponentLoader
 @using QuizCrafter.Web.Quiz.Models
-@using QuizCrafter.Web.Services
 @using System.Reflection
-@using QuizCrafter.Web.Services.ModularComponents
-@inject ModularComponentProvider mcp
+@using QuizCrafter.ModularComponents.Abstraction.Core
+@inject IModularComponentCollection _modularComponentCollection;
 @inject LazyAssemblyLoader AssemblyLoader
 
 <MudItem xs="12" sm="10">
@@ -27,12 +26,14 @@
                                  <MudIconButton Icon="@Icons.Material.Filled.Close" Title="Delete" OnClick="()=>DeleteQuestion(question)" Style="padding-top:5px; padding-bottom:0"></MudIconButton>
                              </MudItem>
                              <MudItem xs="12">
-                                 <DynamicComponent Type="mcp.GetTypeDefinitionForomModel(question).EditComponentType" Parameters="mcp.GetTypeDefinitionForomModel(question).GetParameterDictionary(question)"></DynamicComponent>
+                                 <DynamicComponent Type="_modularComponentCollection.GetEditableComponentDefinition(question)" Parameters="_modularComponentCollection.GetParameterDictionary(question)"></DynamicComponent>
                              </MudItem>
                          </MudGrid>
                      </SortableItemTemplate>
                  </SortableList>
              </MudGrid>
+
+             <MudDivider Class="mt-3 mb-3"></MudDivider>
 
              <MudButton OnClick="()=>CreateQuizAsync()">Create quiz</MudButton>
          </MudItem>
@@ -81,7 +82,7 @@
 
     private void AddComponent((int oldIndex, int newIndex) indices)
     {
-        var item = mcp.Instances[indices.oldIndex];
+        var item = _modularComponentCollection[indices.oldIndex];
         quiz.AddQuestion(item.CreateModel());
 
         StateHasChanged();

@@ -1,5 +1,5 @@
 ﻿using MudBlazor;
-using QuizCrafter.ModularComponents.Abstraction;
+using QuizCrafter.ModularComponents.Abstraction.Core;
 using QuizCrafter.ModularComponents.MultiChoiceQuestion.Presentation.Components;
 using QuizCrafter.ModularComponents.MultiChoiceQuestion.Presentation.Models;
 
@@ -20,6 +20,6 @@ namespace QuizCrafter.ModularComponents.MultiChoiceQuestion.Presentation
             return new Question();
         }
 
-        public Dictionary<string, object> GetParameterDictionary(object parameterObject) => new Dictionary<string, object>() { { "Question", parameterObject } };
+        public Dictionary<string, object> GetParameterDictionary(object parameterObject) => new Dictionary<string, object>() { { nameof(Question), parameterObject } };
     }
 }
