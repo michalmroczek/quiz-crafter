@@ -83,7 +83,7 @@
     private void AddComponent((int oldIndex, int newIndex) indices)
     {
         var item = _modularComponentCollection[indices.oldIndex];
-        quiz.AddQuestion(item.CreateModel());
+        quiz.AddQuestion(item.CreateModel(), indices.newIndex);
 
         StateHasChanged();
     }

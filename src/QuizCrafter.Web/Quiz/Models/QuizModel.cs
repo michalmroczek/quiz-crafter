@@ -1,4 +1,5 @@
 ﻿using QuizCrafter.ModularComponents.Abstraction.Core;
+using static MudBlazor.CategoryTypes;
 
 namespace QuizCrafter.Web.Quiz.Models
 {
@@ -20,11 +21,19 @@ namespace QuizCrafter.Web.Quiz.Models
             _questions = new List<IModularComponentModel>();
         }
 
-        public void AddQuestion(IModularComponentModel question)
+        public void AddQuestion(IModularComponentModel question, int index)
         {
             int order = _questions.Any() ? _questions.Max(q => q.Order) + 1 : 1;
             question.Order = order;
-            _questions.Add(question);
+
+            if (index < QuestionCount)
+            {
+                _questions.Insert(index, question);
+            }
+            else
+            {
+                _questions.Add(question);
+            }
         }
 
         public void RemoveQuestion(Guid questionId)
