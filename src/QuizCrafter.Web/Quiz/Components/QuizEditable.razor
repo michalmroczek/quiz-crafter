@@ -15,6 +15,7 @@
                 <MudItem xs="10">
                     <MudTextField @bind-Value="quiz.Title" Label="Quiz name" Variant="MudBlazor.Variant.Outlined"  AutoGrow></MudTextField>
                  </MudItem>
+                 <MudItem xs="10">
                  <SortableList Id="sortable" Group="cloning" Pull="clone" Items="quiz?.Questions" OnUpdate="@SortList" Context="question" Handle=".drag-handle-question" OnAdd="AddComponent" Class="mud-grid mud-grid-item mud-grid-item-xs-12 drop-zone sortable-list">
                      <SortableItemTemplate>
                          <MudGrid Justify="Justify.FlexEnd" Spacing="0" Class="mt-3">
@@ -31,6 +32,7 @@
                          </MudGrid>
                      </SortableItemTemplate>
                  </SortableList>
+                 </MudItem>
              </MudGrid>
 
              <MudDivider Class="mt-3 mb-3"></MudDivider>
