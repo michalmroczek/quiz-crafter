@@ -4,7 +4,7 @@
 
 @inject IModularComponentCollection _modularComponentCollection
 
-<MudDrawer @bind-Open="@open" DisableOverlay="true" Elevation="1" Variant="@DrawerVariant.Temporary" ClipMode="DrawerClipMode.Always" Anchor="Anchor.Right" Class="drawer-responsive">
+<MudDrawer @bind-Open="@open" DisableOverlay="true" Elevation="1" ClipMode="DrawerClipMode.Always" Breakpoint="Breakpoint.Sm" Anchor="Anchor.Right" Style="--mud-drawer-width: 18vw;">
     <MudDrawerHeader>
         <MudGrid>
             <MudItem xs="1">           
@@ -15,7 +15,7 @@
             </MudItem>
         </MudGrid>
     </MudDrawerHeader>
-    <SortableList Id="drawer" Group="cloning" Pull="clone" Class="d-flex mud-width-full" Items="modularComponentDefinitions" Context="definitionType" Sort="false">
+    <SortableList Id="drawer" Group="cloning" Pull="clone" Class="d-flex flex-wrap justify-center gap-2" Items="modularComponentDefinitions" Context="definitionType" Sort="false">
         <SortableItemTemplate>
             <IconTemplate Icon="@definitionType.Icon" Name="@definitionType.DisplayName"></IconTemplate>
         </SortableItemTemplate>
