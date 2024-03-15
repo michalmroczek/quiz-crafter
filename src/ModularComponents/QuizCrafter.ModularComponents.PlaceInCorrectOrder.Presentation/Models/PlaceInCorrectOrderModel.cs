@@ -9,7 +9,13 @@ namespace QuizCrafter.ModularComponents.PlaceInCorrectOrder.Presentation.Models
 {
     public class PlaceInCorrectOrderModel : IModularComponentModel
     {
-        public Guid Id { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public int Order { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public Guid Id { get; set; }
+
+        public int Order { get; set; }
+
+        internal List<Section> Sections { get; set; }
+
+        internal List<AnswerItem> Answers { get; set; }
+
     }
 }
