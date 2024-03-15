@@ -1,0 +1,17 @@
+﻿@using QuizCrafter.ModularComponents.PlaceInCorrectOrder.Presentation.Models
+@using QuizCrafter.Shared.Components
+<SortableList Put=false Items="PlaceInCorrectOrderModel?.Sections" OnUpdate="@Update" Handle=".drag-handle-answer" Context="answer" Class="mud-grid-item mud-grid-item-xs-12">
+                            <SortableItemTemplate>
+                                @*TODO add sections and items*@
+                            </SortableItemTemplate>
+          </SortableList>
+
+@code {
+    [Parameter]
+    public PlaceInCorrectOrderModel PlaceInCorrectOrderModel { get; set; }
+
+    protected void Update()
+    {
+        
+    }
+}

@@ -27,7 +27,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizCrafter.ModularComponen
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizCrafter.ModularComponents.PlaceInCorrectOrder.Presentation", "src\ModularComponents\QuizCrafter.ModularComponents.PlaceInCorrectOrder.Presentation\QuizCrafter.ModularComponents.PlaceInCorrectOrder.Presentation.csproj", "{F89BBA62-169F-4D31-92C4-29E3EB0E4E30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizCrafter.ModularComponents.Infrastructure", "src\ModularComponents\QuizCrafter.ModularComponents.Infrastructure\QuizCrafter.ModularComponents.Infrastructure.csproj", "{A323BC6A-CE22-4797-BB78-C1C319156589}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizCrafter.ModularComponents.Infrastructure", "src\ModularComponents\QuizCrafter.ModularComponents.Infrastructure\QuizCrafter.ModularComponents.Infrastructure.csproj", "{A323BC6A-CE22-4797-BB78-C1C319156589}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Components", "Components", "{D2F1FE93-8908-4F6E-BD14-403D5D0D8BB7}"
 EndProject
