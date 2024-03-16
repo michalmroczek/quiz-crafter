@@ -1,6 +1,6 @@
 ﻿@using QuizCrafter.Shared.Components
 @inject IDialogService DialogService
-<MudPaper Elevation="3">
+
     <RitchTextEditor OnAddAnswer="OnAddAnswer"></RitchTextEditor>
 @* <SortableList  Group="fillInTheBlanks" Put=false ></SortableList> *@
     @if (FillInTheBlanksModel.textWithBlanks?.Select(t => t.BlankAnswer) is not null)
@@ -9,7 +9,6 @@
         <MudChip Color="Color.Default" OnClose="Remove">@blanks.Answer</MudChip>
     }
     
-</MudPaper>
 @code {
     [Parameter]
     public Models.FillInTheBlanksModel FillInTheBlanksModel { get; set; } = new();
