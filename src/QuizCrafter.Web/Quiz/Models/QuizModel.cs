@@ -46,5 +46,36 @@ namespace QuizCrafter.Web.Quiz.Models
 
             _questions.Remove(questionToRemove);
         }
+
+        public void ChangeOrder(int oldIndex, int newIndex)
+        {
+
+                // Assuming quiz.Questions is a collection that supports .ToList()
+                var items = _questions.ToList();
+                var itemToMove = items[oldIndex];
+
+                // Remove the item from its old position
+                items.RemoveAt(oldIndex);
+
+                // Now we insert the item at the new index. If the new index is beyond the last position, Add the item instead.
+                if (newIndex < items.Count)
+                {
+                    items.Insert(newIndex, itemToMove);
+                }
+                else
+                {
+                    items.Add(itemToMove);
+                }
+
+            int index = 1; // Assuming you want Order to start at 1
+
+            for (int i = 0; i < items.Count; i++)
+            {
+                items[i].Order = i + 1; // Assuming you want Order to start at 1
+            }
+
+            // Assuming you need to update the original Questions list with the new order
+            _questions = items; // Make sure quiz.Questions can be assigned a list, or use an appropriate method to update its contents.
+        }
     }
 }

@@ -13,36 +13,42 @@
         <MudItem xs="12">
             <MudGrid Justify="Justify.Center">
                 <MudItem xs="10">
-                    <MudTextField @bind-Value="quiz.Title" Label="Quiz name" Variant="MudBlazor.Variant.Outlined"  AutoGrow></MudTextField>
+                    <MudTextField @bind-Value="quiz.Title" Label="Quiz name" Variant="MudBlazor.Variant.Outlined" AutoGrow></MudTextField>
                  </MudItem>
                  <MudItem xs="10">
-                 <SortableList Id="sortable" Group="cloning" Pull="clone" Items="quiz?.Questions" OnUpdate="@SortList" Context="question" Handle=".drag-handle-question" OnAdd="AddComponent" Class="mud-grid mud-grid-item mud-grid-item-xs-12 drop-zone sortable-list">
-                     <SortableItemTemplate>
-                         <MudGrid Justify="Justify.FlexEnd" Spacing="0" Class="mt-3">
-                             <MudItem xs="1">
-                             <MudIcon Icon="@Icons.Material.Filled.DragIndicator" Title="Drag" Class="drag-handle-question" Style="cursor:grab" />
-                             </MudItem>
-                             <MudSpacer/>
-                             <MudItem xs="1">
-                                 <MudIconButton Icon="@Icons.Material.Filled.Close" Title="Delete" OnClick="()=>DeleteQuestion(question)" Style="padding-top:5px; padding-bottom:0"></MudIconButton>
-                             </MudItem>
-                             <MudItem xs="12">
-                                 <DynamicComponent Type="_modularComponentCollection.GetEditableComponentDefinition(question)" Parameters="_modularComponentCollection.GetParameterDictionary(question)"></DynamicComponent>
-                             </MudItem>
-                         </MudGrid>
-                     </SortableItemTemplate>
-                 </SortableList>
-                 </MudItem>
-             </MudGrid>
+                     <SortableList Id="sortable" Group="cloning" Pull="clone" Items="quiz?.Questions" OnUpdate="@SortList" Context="question" Handle=".drag-handle-question" OnAdd="AddComponent" Class="mud-grid mud-grid-item mud-grid-item-xs-12 drop-zone sortable-list">
+                         <SortableItemTemplate>
+                             <MudItem xs="12" Class="mt-3">
+                                 <MudPaper>
+                                     <MudGrid Justify="Justify.FlexStart" Spacing="1" Class="mt-3">
+                                         <MudItem xs="3"><MudText Typo="Typo.caption">Order number #@question.Order</MudText></MudItem>
+                                            <MudItem xs="3" />
+                                            <MudItem xs="1">
+                                                <MudIcon Icon="@Icons.Material.Filled.DragIndicator" Title="Drag" Class="drag-handle-question" Style="cursor:grab" />
+                                            </MudItem>
+                                            <MudItem xs="4" />
+                                            <MudItem xs="1">
+                                                <MudIconButton Icon="@Icons.Material.Filled.Close" Title="Delete" OnClick="()=>DeleteQuestion(question)" Style="padding-top:5px; padding-bottom:0"></MudIconButton>
+                                            </MudItem>
+                                            <MudItem xs="12" Class="p-3">
+                                                <DynamicComponent Type="_modularComponentCollection.GetEditableComponentDefinition(question)" Parameters="_modularComponentCollection.GetParameterDictionary(question)"></DynamicComponent>
+                                            </MudItem>
+                                        </MudGrid>
+                                    </MudPaper>
+                                </MudItem>
+                            </SortableItemTemplate>
+                        </SortableList>
+                    </MudItem>
+                </MudGrid>
 
-             <MudDivider Class="mt-3 mb-3"></MudDivider>
+                <MudDivider Class="mt-3 mb-3"></MudDivider>
 
-             <MudButton OnClick="()=>CreateQuizAsync()">Create quiz</MudButton>
-         </MudItem>
-     </MudGrid>
- </MudItem>
+                <MudButton OnClick="()=>CreateQuizAsync()">Create quiz</MudButton>
+            </MudItem>
+        </MudGrid>
+    </MudItem>
 
- @code {
+    @code {
     QuizModel quiz = new();
 
     private void DeleteQuestion(IModularComponentModel componentModel)
@@ -59,18 +65,7 @@
         // deconstruct the tuple
         var (oldIndex, newIndex) = indices;
 
-        var items = quiz.Questions.ToList();
-        var itemToMove = items[oldIndex];
-        items.RemoveAt(oldIndex);
-
-        if (newIndex < items.Count)
-        {
-            items.Insert(newIndex, itemToMove);
-        }
-        else
-        {
-            items.Add(itemToMove);
-        }
+        quiz.ChangeOrder(indices.oldIndex, indices.newIndex);
 
         StateHasChanged();
     }

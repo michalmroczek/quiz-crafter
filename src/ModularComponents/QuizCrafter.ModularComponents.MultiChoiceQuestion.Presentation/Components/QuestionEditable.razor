@@ -1,20 +1,13 @@
 ﻿@using MudBlazor
 @using QuizCrafter.Shared.Components
 
-    <MudGrid Justify="Justify.Center">
-        <MudItem xs="12">
-            <MudCard Class="primary rounded" Elevation="4">
-                <MudCardHeader>
-                    <CardHeaderContent>
-                        <MudText Typo="Typo.caption">Question number #@Question.Order</MudText>
+
+
+                        
                             <MudTextField @bind-Value="Question.Text" Label="Question text" Variant="MudBlazor.Variant.Outlined"   
                     AutoGrow
                          ></MudTextField>
-                     </CardHeaderContent>
-                     <CardHeaderActions>
-                    </CardHeaderActions>
-                </MudCardHeader>
-                <MudCardContent>
+                         <MudDivider Class="mt-3 mb-3"/>
                     <MudGrid>
                         <SortableList Id="@SortableHtmlId" Put=false Items="Question?.Answers" OnUpdate="@SortList" Handle=".drag-handle-answer" Context="answer" Class="mud-grid-item mud-grid-item-xs-12">
                             <SortableItemTemplate>
@@ -22,14 +15,10 @@
                             </SortableItemTemplate>
                         </SortableList>
                     </MudGrid>
-                </MudCardContent>
-                <MudCardActions>
                      <MudButton OnClick="()=>AddAnswer()" Variant="MudBlazor.Variant.Text" Color="Color.Primary">Add answer</MudButton> <MudSpacer />
 
-                </MudCardActions>
-            </MudCard>
-        </MudItem>
-    </MudGrid>
+     
+
 
 @code {
     private string SortableHtmlId => $"sortable-answer-{Question.Order.ToString()}";

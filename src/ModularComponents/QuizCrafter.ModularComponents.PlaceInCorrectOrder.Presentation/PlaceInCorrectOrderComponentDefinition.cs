@@ -1,6 +1,4 @@
-using Microsoft.JSInterop;
 using QuizCrafter.ModularComponents.Abstraction.Core;
-using QuizCrafter.ModularComponents.PlaceInCorrectOrder.Presentation.Models;
 
 namespace QuizCrafter.ModularComponents.PlaceInCorrectOrder.Presentation
 {
@@ -10,7 +8,7 @@ namespace QuizCrafter.ModularComponents.PlaceInCorrectOrder.Presentation
 
         public string DisplayName => "Place in correct order";
 
-        public string Icon => "";
+        public string Icon => MudBlazor.Icons.Filled.List;
 
         public Type ModelType => throw new NotImplementedException();
 
