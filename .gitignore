@@ -365,3 +365,4 @@ FodyWeavers.xsd
 /infra/params.json
 /*.sln.bak
 /src/QuizCrafter.Web/wwwroot/appsettings.development.json
+/src/Modules/Quizzes/QuizCrafter.Modules.Quizzes.Api/appsettings.Development.json

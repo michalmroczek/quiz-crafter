@@ -52,31 +52,8 @@
         </span>
     </ToolbarContent>
     <EditorContent>
-        <h4>This Toolbar works with HTML</h4>
-        <a href="http://BlazorHelpWebsite.com">
-            BlazorHelpWebsite.com
-        </a>
     </EditorContent>
 </BlazoredTextEditor>
-<br />
-<button class="btn btn-primary"
-        @onclick="GetHTML">
-    Get HTML
-</button>
-<button class="btn btn-primary"
-        @onclick="SetHTML">
-    Set HTML
-</button>
-<br />
-<div>
-    <br />
-    @((MarkupString)QuillHTMLContent)
-    @QuillHTMLContent
-</div>
-@QuillHTMLContent
-@Text
-<br />
-
 @code {
     [Parameter]
     public EventCallback OnAddAnswer { get; set; }

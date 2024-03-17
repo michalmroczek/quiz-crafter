@@ -15,13 +15,13 @@
                 <MudItem xs="10">
                     <MudTextField @bind-Value="quiz.Title" Label="Quiz name" Variant="MudBlazor.Variant.Outlined" AutoGrow></MudTextField>
                  </MudItem>
-                 <MudItem xs="10">
+                 <MudItem xs="10" Style="min-height: 30vh">
                      <SortableList Id="sortable" Group="cloning" Pull="clone" Items="quiz?.Questions" OnUpdate="@SortList" Context="question" Handle=".drag-handle-question" OnAdd="AddComponent" Class="mud-grid mud-grid-item mud-grid-item-xs-12 drop-zone sortable-list">
                          <SortableItemTemplate>
                              <MudItem xs="12" Class="mt-3">
-                                 <MudPaper>
+                                 <MudPaper Elevation="3" Class="rounded">
                                      <MudGrid Justify="Justify.FlexStart" Spacing="1" Class="mt-3">
-                                         <MudItem xs="3"><MudText Typo="Typo.caption">Order number #@question.Order</MudText></MudItem>
+                                         <MudItem xs="3"><MudText Typo="Typo.caption"> #@question.Order/@quiz.QuestionCount </MudText></MudItem>
                                             <MudItem xs="3" />
                                             <MudItem xs="1">
                                                 <MudIcon Icon="@Icons.Material.Filled.DragIndicator" Title="Drag" Class="drag-handle-question" Style="cursor:grab" />
