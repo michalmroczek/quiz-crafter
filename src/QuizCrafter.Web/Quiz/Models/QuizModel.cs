@@ -9,7 +9,7 @@ namespace QuizCrafter.Web.Quiz.Models
         public string Title { get; set; }
         public Guid UserCreatorId { get; set; }
         public List<string> Tags { get; set; }
-        public IEnumerable<IModularComponentModel> Questions => _questions;
+        public IEnumerable<IModularComponentModel> Questions => _questions.OrderBy(t=>t.Order);
         public int QuestionCount => _questions.Count();
 
         private IList<IModularComponentModel> _questions;

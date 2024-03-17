@@ -3,12 +3,24 @@
 @* @inject HttpClient httpClient *@
 @inject NavigationManager NavigationManager
 @inject IStringLocalizer<Home> Localizer
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IHttpClientFactory _httpClientFactory
+
 @* @inject LazyCultureProvider LazyCultureProvider *@
 <MudGrid Spacing="4" Justify="Justify.Center">
     <MudItem xs="12"><MudFab Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add" OnClick="CreateNewWorkspace" /></MudItem>
-    </MudGrid>
-    @code {
 
+    <AuthorizeView>
+        <Authorized>
+            <text>Welcome, @context.User.Identity.Name!</text>
+        </Authorized>
+        <NotAuthorized>
+            <text>You are not authorized. Please log in.</text>
+        </NotAuthorized>
+    </AuthorizeView>
+    </MudGrid>
+@code {
+    string quizzes;
     private void CreateNewWorkspace()
     {
         NavigationManager.NavigateTo("create-quiz");
@@ -18,7 +30,15 @@
 
     protected override async Task OnInitializedAsync()
     {
-        // await LazyCultureProvider.SubscribeLanguageChangeAsync(this);
+        using var httpClient = _httpClientFactory.CreateClient("QuizCrafter.API"); 
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        var isUserAuthenticated = user.Identity.IsAuthenticated;
+        if (isUserAuthenticated)
+        {
+            var response = await httpClient.GetAsync($"{httpClient.BaseAddress}/me/quizzes");
+        }
 
     }
 

@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Web.Resource;
+using QuizCrafter.Modules.Quizzes.Application.Quizzes.Queries;
+using System.Security.Claims;
 
 namespace QuizCrafter.Modules.Quizzes.Api.Controllers
 {
@@ -10,10 +13,18 @@ namespace QuizCrafter.Modules.Quizzes.Api.Controllers
     [RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes")]
     public class MyQuizzesController : ControllerBase
     {
+        private readonly IMediator _mediator;
+
+        public MyQuizzesController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
+
         [HttpGet]
         public async Task<ActionResult<List<QuizItemDto>>> GetQuizzesAsync()
         {
-            return Ok();
+            var userIdentity = User.FindFirst(ClaimTypes.NameIdentifier);
+            return Ok(_mediator.Send(new GetMyQuizzesQuery(userIdentity.Value)));
         }
 
         [HttpGet("{id:guid}")]
