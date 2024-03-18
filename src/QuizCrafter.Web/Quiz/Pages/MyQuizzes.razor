@@ -1,0 +1,32 @@
+﻿@page "/me/quizzes"
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.Extensions.Localization
+@using QuizCrafter.Shared.Contracts.Quizzes.Contracts
+@inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IHttpClientFactory _httpClientFactory
+@attribute [Authorize]
+@* @inject LazyCultureProvider LazyCultureProvider *@
+<MudGrid Spacing="4" Justify="Justify.Center">
+    <MudItem xs="12"><MudFab Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add" OnClick="CreateNewQuiz" /></MudItem>
+
+</MudGrid>
+@code {
+    private void CreateNewQuiz()
+    {
+        NavigationManager.NavigateTo("/create-quiz");
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var httpClient = _httpClientFactory.CreateClient("QuizCrafter.API");
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        var isUserAuthenticated = user.Identity.IsAuthenticated;
+        if (isUserAuthenticated)
+        {
+            var result = await httpClient.GetFromJsonAsync<GetMyQuizzesContract>($"{httpClient.BaseAddress}/me/quizzes");
+        }
+    }
+}

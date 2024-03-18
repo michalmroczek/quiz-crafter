@@ -31,11 +31,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizCrafter.ModularComponen
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Components", "Components", "{D2F1FE93-8908-4F6E-BD14-403D5D0D8BB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizCrafter.Modules.Quizzes.Application", "src\Modules\Quizzes\QuizCrafter.Modules.Quizzes.Application\QuizCrafter.Modules.Quizzes.Application.csproj", "{DDE45755-E9FA-405B-A05B-56E8BA07EC52}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizCrafter.Modules.Quizzes.Application", "src\Modules\Quizzes\QuizCrafter.Modules.Quizzes.Application\QuizCrafter.Modules.Quizzes.Application.csproj", "{DDE45755-E9FA-405B-A05B-56E8BA07EC52}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizCrafter.Shared.Abstraction", "src\Shared\QuizCrafter.Shared.Abstraction\QuizCrafter.Shared.Abstraction.csproj", "{0436647D-0E0D-412A-A444-BFCDD93B2A91}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizCrafter.Shared.Abstraction", "src\Shared\QuizCrafter.Shared.Abstraction\QuizCrafter.Shared.Abstraction.csproj", "{0436647D-0E0D-412A-A444-BFCDD93B2A91}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizCrafter.Shared.Infrastructure", "src\Shared\QuizCrafter.Shared.Infrastructure\QuizCrafter.Shared.Infrastructure.csproj", "{622838DE-2D2F-46D0-8670-A472D232788F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizCrafter.Shared.Infrastructure", "src\Shared\QuizCrafter.Shared.Infrastructure\QuizCrafter.Shared.Infrastructure.csproj", "{622838DE-2D2F-46D0-8670-A472D232788F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizCrafter.Shared.Contracts", "src\Shared\QuizCrafter.Shared.Contracts\QuizCrafter.Shared.Contracts.csproj", "{2D44F447-4E4B-4FB7-93D1-2B7D3D16FAFA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +89,10 @@ Global
 		{622838DE-2D2F-46D0-8670-A472D232788F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{622838DE-2D2F-46D0-8670-A472D232788F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{622838DE-2D2F-46D0-8670-A472D232788F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D44F447-4E4B-4FB7-93D1-2B7D3D16FAFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D44F447-4E4B-4FB7-93D1-2B7D3D16FAFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D44F447-4E4B-4FB7-93D1-2B7D3D16FAFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D44F447-4E4B-4FB7-93D1-2B7D3D16FAFA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -104,6 +110,7 @@ Global
 		{DDE45755-E9FA-405B-A05B-56E8BA07EC52} = {6E29B1EC-595C-413D-8D7B-65F25C284CD6}
 		{0436647D-0E0D-412A-A444-BFCDD93B2A91} = {45F07D38-849F-47C9-92C8-0046E2204A29}
 		{622838DE-2D2F-46D0-8670-A472D232788F} = {45F07D38-849F-47C9-92C8-0046E2204A29}
+		{2D44F447-4E4B-4FB7-93D1-2B7D3D16FAFA} = {45F07D38-849F-47C9-92C8-0046E2204A29}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2D618763-F8C8-407A-8B6B-2D3618F42780}
