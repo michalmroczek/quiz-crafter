@@ -1,5 +1,6 @@
 ﻿@page "/"
 @using Microsoft.Extensions.Localization
+@using QuizCrafter.Shared.Contracts.Quizzes.Contracts
 @* @inject HttpClient httpClient *@
 @inject NavigationManager NavigationManager
 @inject IStringLocalizer<Home> Localizer
@@ -8,25 +9,25 @@
 
 @* @inject LazyCultureProvider LazyCultureProvider *@
 <MudGrid Spacing="4" Justify="Justify.Center">
-    <MudItem xs="12"><MudFab Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add" OnClick="CreateNewWorkspace" /></MudItem>
-
     <AuthorizeView>
         <Authorized>
-            <text>Welcome, @context.User.Identity.Name!</text>
+            <MudText Typo="Typo.h2">Welcome, click here to navigate to your profile </MudText><MudButton OnClick="NavigateToMyQuizes"
+                                                                                                         Variant="Variant.Outlined"
+                                                                                                         EndIcon="@Icons.Material.Filled.ManageAccounts"
+                                                                                                         Color="Color.Tertiary">
+                My account
+            </MudButton>
         </Authorized>
         <NotAuthorized>
-            <text>You are not authorized. Please log in.</text>
+                <MudText Typo="Typo.h2">You are not authorized. Please log in to be able to create and view quizes</MudText>
         </NotAuthorized>
-    </AuthorizeView>
+    </AuthorizeView> 
     </MudGrid>
 @code {
-    string quizzes;
-    private void CreateNewWorkspace()
+    private void NavigateToMyQuizes()
     {
-        NavigationManager.NavigateTo("create-quiz");
+        NavigationManager.NavigateTo("/me/quizes");
     }
-
-    private string serverMessage = "";
 
     protected override async Task OnInitializedAsync()
     {
@@ -37,11 +38,9 @@
         var isUserAuthenticated = user.Identity.IsAuthenticated;
         if (isUserAuthenticated)
         {
-            var response = await httpClient.GetAsync($"{httpClient.BaseAddress}/me/quizzes");
+            var response = await httpClient.GetFromJsonAsync<GetMyQuizzesContract>($"{httpClient.BaseAddress}/me/quizzes");
         }
 
     }
-
-    // public void Dispose() => LazyCultureProvider.UnsubscribeLanguageChange(this);
 
 }
