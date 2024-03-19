@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Web.Resource;
 using QuizCrafter.Modules.Quizzes.Application.Quizzes.Queries;
+using QuizCrafter.Shared.Contracts.Quizzes.Contracts.Responses;
 using System.Security.Claims;
 
 namespace QuizCrafter.Modules.Quizzes.Api.Controllers
@@ -21,10 +22,11 @@ namespace QuizCrafter.Modules.Quizzes.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<QuizItemDto>>> GetQuizzesAsync()
+        public async Task<ActionResult<GetMyQuizzesResponse>> GetQuizzesAsync()
         {
             var userIdentity = User.FindFirst(ClaimTypes.NameIdentifier);
-            return Ok(_mediator.Send(new GetMyQuizzesQuery(userIdentity.Value)));
+            var response = await _mediator.Send(new GetMyQuizzesQuery(Guid.Parse(userIdentity.Value)));
+            return Ok(response);
         }
 
         [HttpGet("{id:guid}")]

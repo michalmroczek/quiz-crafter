@@ -1,9 +1,6 @@
 ﻿@page "/"
-@using Microsoft.Extensions.Localization
-@using QuizCrafter.Shared.Contracts.Quizzes.Contracts
 @* @inject HttpClient httpClient *@
 @inject NavigationManager NavigationManager
-@inject IStringLocalizer<Home> Localizer
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject IHttpClientFactory _httpClientFactory
 
@@ -11,7 +8,7 @@
 <MudGrid Spacing="4" Justify="Justify.Center">
     <AuthorizeView>
         <Authorized>
-            <MudText Typo="Typo.h2">Welcome, click here to navigate to your profile </MudText><MudButton OnClick="NavigateToMyQuizes"
+            <MudText Typo="Typo.h5">Welcome, click here to navigate to your profile </MudText><MudButton OnClick="NavigateToMyQuizes"
                                                                                                          Variant="Variant.Outlined"
                                                                                                          EndIcon="@Icons.Material.Filled.ManageAccounts"
                                                                                                          Color="Color.Tertiary">
@@ -19,7 +16,7 @@
             </MudButton>
         </Authorized>
         <NotAuthorized>
-                <MudText Typo="Typo.h2">You are not authorized. Please log in to be able to create and view quizes</MudText>
+                <MudText Typo="Typo.h5">You are not authorized. Please log in to be able to create and view quizes</MudText>
         </NotAuthorized>
     </AuthorizeView> 
     </MudGrid>
@@ -27,20 +24,6 @@
     private void NavigateToMyQuizes()
     {
         NavigationManager.NavigateTo("/me/quizes");
-    }
-
-    protected override async Task OnInitializedAsync()
-    {
-        using var httpClient = _httpClientFactory.CreateClient("QuizCrafter.API"); 
-        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        var user = authState.User;
-
-        var isUserAuthenticated = user.Identity.IsAuthenticated;
-        if (isUserAuthenticated)
-        {
-            var response = await httpClient.GetFromJsonAsync<GetMyQuizzesContract>($"{httpClient.BaseAddress}/me/quizzes");
-        }
-
     }
 
 }

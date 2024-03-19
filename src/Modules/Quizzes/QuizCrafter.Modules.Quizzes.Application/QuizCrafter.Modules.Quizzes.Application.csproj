@@ -7,11 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Quizzes\Commands\" />
+    <Compile Remove="Quizzes\Commands\**" />
+    <EmbeddedResource Remove="Quizzes\Commands\**" />
+    <None Remove="Quizzes\Commands\**" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="MediatR" Version="12.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\QuizCrafter.Shared.Contracts\QuizCrafter.Shared.Contracts.csproj" />
+    <ProjectReference Include="..\QuizCrafter.Modules.Quizzes.Domain\QuizCrafter.Modules.Quizzes.Domain.csproj" />
   </ItemGroup>
 
 </Project>

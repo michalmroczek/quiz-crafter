@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\QuizCrafter.Shared.Contracts\QuizCrafter.Shared.Contracts.csproj" />
     <ProjectReference Include="..\QuizCrafter.Modules.Quizzes.Application\QuizCrafter.Modules.Quizzes.Application.csproj" />
   </ItemGroup>
 
