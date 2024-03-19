@@ -1,18 +1,21 @@
 ﻿using MediatR;
-using QuizCrafter.Modules.Quizzes.Application.Quizzes.DTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using QuizCrafter.Modules.Quizzes.Application.Extensions;
+using QuizCrafter.Modules.Quizzes.Domain.Quizzes.Repositories;
+using QuizCrafter.Shared.Contracts.Quizzes.Contracts.Responses;
 
 namespace QuizCrafter.Modules.Quizzes.Application.Quizzes.Queries.Handlers
 {
-    internal class GetMyQuizzesQueryHandler : IRequestHandler<GetMyQuizzesQuery, IEnumerable<QuizDto>>
+    public class GetMyQuizzesQueryHandler : IRequestHandler<GetMyQuizzesQuery, GetMyQuizzesResponse>
     {
-        public Task<IEnumerable<QuizDto>> Handle(GetMyQuizzesQuery request, CancellationToken cancellationToken)
+        private readonly IQuizRepository _quizRepository;
+
+        public GetMyQuizzesQueryHandler(IQuizRepository quizRepository)
         {
-            return null;
+            _quizRepository = quizRepository;
         }
+
+        public async Task<GetMyQuizzesResponse> Handle(GetMyQuizzesQuery request, CancellationToken cancellationToken)
+            => (await _quizRepository.BrowseByUserAsync(request.UserId)).AsResponse();
+        
     }
 }

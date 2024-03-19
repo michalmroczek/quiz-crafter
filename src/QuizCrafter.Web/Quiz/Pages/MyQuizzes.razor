@@ -1,7 +1,6 @@
 ﻿@page "/me/quizzes"
 @using Microsoft.AspNetCore.Authorization
-@using Microsoft.Extensions.Localization
-@using QuizCrafter.Shared.Contracts.Quizzes.Contracts
+@using QuizCrafter.Shared.Contracts.Quizzes.Contracts.Responses
 @inject NavigationManager NavigationManager
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject IHttpClientFactory _httpClientFactory
@@ -26,7 +25,7 @@
         var isUserAuthenticated = user.Identity.IsAuthenticated;
         if (isUserAuthenticated)
         {
-            var result = await httpClient.GetFromJsonAsync<GetMyQuizzesContract>($"{httpClient.BaseAddress}/me/quizzes");
+            var result = await httpClient.GetFromJsonAsync<GetMyQuizzesResponse>($"{httpClient.BaseAddress}/me/quizzes");
         }
     }
 }

@@ -37,7 +37,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizCrafter.Shared.Abstract
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizCrafter.Shared.Infrastructure", "src\Shared\QuizCrafter.Shared.Infrastructure\QuizCrafter.Shared.Infrastructure.csproj", "{622838DE-2D2F-46D0-8670-A472D232788F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizCrafter.Shared.Contracts", "src\Shared\QuizCrafter.Shared.Contracts\QuizCrafter.Shared.Contracts.csproj", "{2D44F447-4E4B-4FB7-93D1-2B7D3D16FAFA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizCrafter.Shared.Contracts", "src\Shared\QuizCrafter.Shared.Contracts\QuizCrafter.Shared.Contracts.csproj", "{2D44F447-4E4B-4FB7-93D1-2B7D3D16FAFA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizCrafter.Modules.Quizzes.Infrastructure", "src\Modules\Quizzes\QuizCrafter.Modules.Quizzes.Infrastructure\QuizCrafter.Modules.Quizzes.Infrastructure.csproj", "{B1C43810-C36E-4673-98A9-126F9E4F7214}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizCrafter.Modules.Quizzes.Domain", "src\Modules\Quizzes\QuizCrafter.Modules.Quizzes.Domain\QuizCrafter.Modules.Quizzes.Domain.csproj", "{625C1BB3-F3F0-4A02-BB5C-F0AB73EBE58E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,6 +97,14 @@ Global
 		{2D44F447-4E4B-4FB7-93D1-2B7D3D16FAFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D44F447-4E4B-4FB7-93D1-2B7D3D16FAFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D44F447-4E4B-4FB7-93D1-2B7D3D16FAFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1C43810-C36E-4673-98A9-126F9E4F7214}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1C43810-C36E-4673-98A9-126F9E4F7214}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1C43810-C36E-4673-98A9-126F9E4F7214}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1C43810-C36E-4673-98A9-126F9E4F7214}.Release|Any CPU.Build.0 = Release|Any CPU
+		{625C1BB3-F3F0-4A02-BB5C-F0AB73EBE58E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{625C1BB3-F3F0-4A02-BB5C-F0AB73EBE58E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{625C1BB3-F3F0-4A02-BB5C-F0AB73EBE58E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{625C1BB3-F3F0-4A02-BB5C-F0AB73EBE58E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -111,6 +123,8 @@ Global
 		{0436647D-0E0D-412A-A444-BFCDD93B2A91} = {45F07D38-849F-47C9-92C8-0046E2204A29}
 		{622838DE-2D2F-46D0-8670-A472D232788F} = {45F07D38-849F-47C9-92C8-0046E2204A29}
 		{2D44F447-4E4B-4FB7-93D1-2B7D3D16FAFA} = {45F07D38-849F-47C9-92C8-0046E2204A29}
+		{B1C43810-C36E-4673-98A9-126F9E4F7214} = {6E29B1EC-595C-413D-8D7B-65F25C284CD6}
+		{625C1BB3-F3F0-4A02-BB5C-F0AB73EBE58E} = {6E29B1EC-595C-413D-8D7B-65F25C284CD6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2D618763-F8C8-407A-8B6B-2D3618F42780}

@@ -1,7 +1,7 @@
 ﻿using MediatR;
-using QuizCrafter.Modules.Quizzes.Application.Quizzes.DTO;
+using QuizCrafter.Shared.Contracts.Quizzes.Contracts.Responses;
 
 namespace QuizCrafter.Modules.Quizzes.Application.Quizzes.Queries
 {
-    public record GetMyQuizzesQuery(string UserId) : IRequest<IEnumerable<QuizDto>>;
+    public record GetMyQuizzesQuery(Guid UserId) : IRequest<GetMyQuizzesResponse>;
 }

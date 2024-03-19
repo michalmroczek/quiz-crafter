@@ -6,8 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\ModularComponents\QuizCrafter.ModularComponents.Abstraction\QuizCrafter.ModularComponents.Abstraction.csproj" />
-  </ItemGroup>
-
 </Project>
