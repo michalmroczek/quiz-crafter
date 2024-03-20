@@ -1,19 +1,10 @@
 ﻿using QuizCrafter.Modules.Quizzes.Domain.Quizzes.Entities;
-using QuizCrafter.Shared.Contracts.Quizzes.Contracts.Responses;
 using QuizCrafter.Shared.Contracts.Quizzes.Dto;
 
 namespace QuizCrafter.Modules.Quizzes.Application.Extensions
 {
-    public static class MappingExtensions
+    public static class EntitiesMappingExtensions
     {
-        public static GetMyQuizzesResponse AsResponse(this IEnumerable<QuizItem> quizItems)
-        {
-            return new()
-            {
-                Quizzes = quizItems.Select(q => q.AsDto())
-            };
-        }
-
         public static QuizDto AsDto(this QuizItem quizItem)
         {
             return new()
@@ -23,6 +14,18 @@ namespace QuizCrafter.Modules.Quizzes.Application.Extensions
                 Tags = quizItem.Tags,
                 Title = quizItem.Title,
                 UserCreatorId = quizItem.UserCreatorId
+            };
+        }
+
+        public static QuizItem AsEntity(this QuizDto quizDto)
+        {
+            return new()
+            {
+                Id = quizDto.Id,
+                Questions = quizDto.Questions,
+                Tags = quizDto.Tags,
+                Title = quizDto.Title,
+                UserCreatorId = quizDto.UserCreatorId
             };
         }
     }
