@@ -5,17 +5,19 @@ using QuizCrafter.Shared.Contracts.Quizzes.Contracts.Responses;
 
 namespace QuizCrafter.Modules.Quizzes.Application.Quizzes.Queries.Handlers
 {
-    public class GetMyQuizzesQueryHandler : IRequestHandler<GetMyQuizzesQuery, GetMyQuizzesResponse>
+    public class GetQuizQueryHandler : IRequestHandler<GetQuizQuery, GetQuizResponse>
     {
         private readonly IQuizRepository _quizRepository;
 
-        public GetMyQuizzesQueryHandler(IQuizRepository quizRepository)
+        public GetQuizQueryHandler(IQuizRepository quizRepository)
         {
             _quizRepository = quizRepository;
         }
 
-        public async Task<GetMyQuizzesResponse> Handle(GetMyQuizzesQuery request, CancellationToken cancellationToken)
-            => (await _quizRepository.BrowseByUserAsync(request.UserId)).AsResponse();
-        
+        public async Task<GetQuizResponse> Handle(GetQuizQuery request, CancellationToken cancellationToken)
+        {
+            var quiz = await _quizRepository.GetAsync(request.QuizId);
+            return quiz.AsResponse();
+        }
     }
 }
