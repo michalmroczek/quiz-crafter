@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Identity.Web;
 using QuizCrafter.Modules.Quizzes.Api.Startup;
 using QuizCrafter.Modules.Quizzes.Application.Extensions;
+using QuizCrafter.Modules.Quizzes.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.ConfigureCors(builder.Configuration);
 builder.Services.AddSwaggerGen();
 builder.Services.AddHealthChecks();
+
+builder.Services.AddInfrastructure();
 
 var app = builder.Build();
 

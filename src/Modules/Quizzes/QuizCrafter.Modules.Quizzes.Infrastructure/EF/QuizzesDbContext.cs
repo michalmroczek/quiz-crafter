@@ -1,14 +1,20 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MongoDB.EntityFrameworkCore.Extensions;
+using QuizCrafter.Modules.Quizzes.Domain.Quizzes.Entities;
 
 namespace QuizCrafter.Modules.Quizzes.Infrastructure.EF
 {
-    internal class QuizzesDbContext : DbContext
+    public class QuizzesDbContext : DbContext
     {
-        
+        public DbSet<QuizItem>  Quizzes { get; init; }
+
+       public QuizzesDbContext(DbContextOptions options) : base(options) { }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<QuizItem>().ToCollection("quizzes");
+        }
     }
 }
