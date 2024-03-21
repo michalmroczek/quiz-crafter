@@ -10,4 +10,8 @@
     <PackageReference Include="MongoDB.EntityFrameworkCore" Version="7.0.0-preview.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\QuizCrafter.Modules.Quizzes.Domain\QuizCrafter.Modules.Quizzes.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -2,11 +2,14 @@
 @using Microsoft.AspNetCore.Components.WebAssembly.Services
 @using QuizCrafter.ModularComponents.Abstraction
 @using QuizCrafter.ModularComponents.Abstraction.ComponentLoader
+@using QuizCrafter.Shared.Contracts.Quizzes.Contracts.Requests
+@using QuizCrafter.Shared.Contracts.Quizzes.Dto
 @using QuizCrafter.Web.Quiz.Models
 @using System.Reflection
 @using QuizCrafter.ModularComponents.Abstraction.Core
 @inject IModularComponentCollection _modularComponentCollection;
 @inject LazyAssemblyLoader AssemblyLoader
+@inject IHttpClientFactory _httpClientFactory
 
 <MudItem xs="12" sm="10">
     <MudGrid Justify="Justify.Center">
@@ -58,6 +61,16 @@
 
     private async Task CreateQuizAsync()
     {
+        using var httpClient = _httpClientFactory.CreateClient("QuizCrafter.API");
+
+        await httpClient.PostAsJsonAsync($"{httpClient.BaseAddress}/me/quizzes", new CreateQuizRequest(){Quiz = new QuizDto()
+        {
+            Id  = quiz.Id,
+            Title = quiz.Title,
+            Questions = quiz.Questions,
+            Tags = quiz.Tags
+        }
+        });
     }
 
     private void SortList((int oldIndex, int newIndex) indices)
