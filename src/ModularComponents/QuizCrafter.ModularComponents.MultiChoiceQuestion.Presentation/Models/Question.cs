@@ -2,7 +2,7 @@
 
 namespace QuizCrafter.ModularComponents.MultiChoiceQuestion.Presentation.Models
 {
-    public class Question : IModularComponentModel
+    public class Question : ModularComponentModel
     {
         public Question()
         {
@@ -15,6 +15,8 @@ namespace QuizCrafter.ModularComponents.MultiChoiceQuestion.Presentation.Models
         public string Text { get; set; }
 
         public IEnumerable<Answer> Answers => _answers;
+
+        public override string Type => nameof(Question);
 
         private IList<Answer> _answers = new List<Answer>();
 

@@ -20,14 +20,14 @@ namespace QuizCrafter.ModularComponents.Infrastructure.ComponentLoader
            => await GetOrLoadInstances();
 
 
-        public Type GetEditableComponentDefinition(IModularComponentModel modularComponentModel)
+        public Type GetEditableComponentDefinition(ModularComponentModel modularComponentModel)
         {
             return
             _instances?.Where(q => q.ModelType == modularComponentModel.GetType()).FirstOrDefault()?.EditComponentType; // return component not found if null
         }
         
 
-        public Dictionary<string, object> GetParameterDictionary(IModularComponentModel modularComponentModel)
+        public Dictionary<string, object> GetParameterDictionary(ModularComponentModel modularComponentModel)
         {
             return
             _instances?.Where(q => q.ModelType == modularComponentModel.GetType()).FirstOrDefault().GetParameterDictionary(modularComponentModel);

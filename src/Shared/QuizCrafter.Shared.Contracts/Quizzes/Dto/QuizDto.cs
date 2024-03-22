@@ -8,6 +8,6 @@ namespace QuizCrafter.Shared.Contracts.Quizzes.Dto
         public string Title { get; set; }
         public Guid UserCreatorId { get; set; }
         public List<string> Tags { get; set; }
-        public IEnumerable<IModularComponentModel> Questions {get;set; }
+        public IEnumerable<ModularComponentModel> Questions {get;set; }
     }
 }

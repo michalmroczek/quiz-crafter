@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
 using QuizCrafter.Modules.Quizzes.Domain.Quizzes.Repositories;
@@ -9,12 +10,16 @@ namespace QuizCrafter.Modules.Quizzes.Infrastructure
 {
     public static class Extensions
     {
-        public static IServiceCollection AddInfrastructure(this IServiceCollection services)
+        public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<QuizzesDbContext>(options =>
+            string connectionString = configuration.GetConnectionString("MongoDb");
+            string databaseName = configuration["MongoDbSettings:DatabaseName"];
+
+            services.AddDbContext<QuizzesDbContext>(options  =>
             {
-                var client = new MongoClient("mongodb://localhost:27017");
-                var database = client.GetDatabase("QuizCrafter");
+               
+                var client = new MongoClient(connectionString);
+                var database = client.GetDatabase(databaseName);
                 options.UseMongoDB(database.Client, database.DatabaseNamespace.DatabaseName);
             });
 
