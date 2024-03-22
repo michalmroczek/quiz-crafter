@@ -15,7 +15,7 @@ namespace QuizCrafter.ModularComponents.FillInTheBlanks.Presentation
 
         public Type ModelType => typeof(FillInTheBlanksModel);
 
-        public IModularComponentModel CreateModel()
+        public ModularComponentModel CreateModel()
         {
             return new FillInTheBlanksModel();
         }

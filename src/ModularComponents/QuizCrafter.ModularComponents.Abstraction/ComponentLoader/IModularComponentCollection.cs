@@ -4,11 +4,11 @@ namespace QuizCrafter.ModularComponents.Abstraction.ComponentLoader
 {
     public interface IModularComponentCollection
     {
-        Type GetEditableComponentDefinition(IModularComponentModel modularComponentModel);
+        Type GetEditableComponentDefinition(ModularComponentModel modularComponentModel);
 
         Task<IReadOnlyCollection<IModularComponentTypeDefinition>> GetComponents();
 
-        Dictionary<string, object> GetParameterDictionary(IModularComponentModel modularComponentModel);
+        Dictionary<string, object> GetParameterDictionary(ModularComponentModel modularComponentModel);
 
         IModularComponentTypeDefinition this[int index] { get; }
     }

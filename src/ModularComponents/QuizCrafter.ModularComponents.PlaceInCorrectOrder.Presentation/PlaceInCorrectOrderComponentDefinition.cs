@@ -12,7 +12,7 @@ namespace QuizCrafter.ModularComponents.PlaceInCorrectOrder.Presentation
 
         public Type ModelType => throw new NotImplementedException();
 
-        public IModularComponentModel CreateModel()
+        public ModularComponentModel CreateModel()
         {
             throw new NotImplementedException();
         }

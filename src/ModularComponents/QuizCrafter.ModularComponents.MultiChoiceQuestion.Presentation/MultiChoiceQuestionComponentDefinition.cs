@@ -15,7 +15,7 @@ namespace QuizCrafter.ModularComponents.MultiChoiceQuestion.Presentation
 
         public string Icon => Icons.Material.Filled.Quiz;
 
-        public IModularComponentModel CreateModel()
+        public ModularComponentModel CreateModel()
         {
             return new Question();
         }

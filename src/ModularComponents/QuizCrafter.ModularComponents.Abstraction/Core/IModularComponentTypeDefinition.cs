@@ -10,7 +10,7 @@
 
         public Type ModelType { get; }
 
-        public IModularComponentModel CreateModel();
+        public ModularComponentModel CreateModel();
 
         public Dictionary<string, object> GetParameterDictionary(object parameterObject);
     }

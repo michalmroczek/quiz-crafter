@@ -9,19 +9,19 @@ namespace QuizCrafter.Web.Quiz.Models
         public string Title { get; set; }
         public Guid UserCreatorId { get; set; }
         public List<string> Tags { get; set; }
-        public IEnumerable<IModularComponentModel> Questions => _questions.OrderBy(t=>t.Order);
+        public IEnumerable<ModularComponentModel> Questions => _questions.OrderBy(t=>t.Order);
         public int QuestionCount => _questions.Count();
 
-        private IList<IModularComponentModel> _questions;
+        private IList<ModularComponentModel> _questions;
 
         public QuizModel()
         {
             Id = Guid.NewGuid();
             Tags = new List<string>();
-            _questions = new List<IModularComponentModel>();
+            _questions = new List<ModularComponentModel>();
         }
 
-        public void AddQuestion(IModularComponentModel question, int index)
+        public void AddQuestion(ModularComponentModel question, int index)
         {
             int order = _questions.Any() ? _questions.Max(q => q.Order) + 1 : 1;
             question.Order = order;

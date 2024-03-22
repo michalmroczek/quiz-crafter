@@ -4,11 +4,13 @@ using System.Collections.Generic;
 
 namespace QuizCrafter.ModularComponents.FillInTheBlanks.Presentation.Models
 {
-    public class FillInTheBlanksModel : IModularComponentModel
+    public class FillInTheBlanksModel : ModularComponentModel
     {
         public Guid Id { get; set; }
         public int Order { get; set; }
 
         public List<TextWithBlank> textWithBlanks { get; set; }
+
+        public override string Type => nameof(FillInTheBlanksModel);
     }
 }
