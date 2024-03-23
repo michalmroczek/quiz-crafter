@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Identity.Web;
+using QuizCrafter.ModularComponents.Abstraction.Core;
 using QuizCrafter.Modules.Quizzes.Api.Startup;
 using QuizCrafter.Modules.Quizzes.Application.Extensions;
 using QuizCrafter.Modules.Quizzes.Infrastructure;
@@ -10,7 +11,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
 builder.Services.AddMediatR(conf => conf.RegisterServicesFromAssemblies(typeof(Program).Assembly, typeof(ApplicationStartupExtensions).Assembly));
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(opts =>
+{
+    opts.JsonSerializerOptions.Converters.Add(new PolymorphicJsonConverter<ModularComponentModel>());
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.ConfigureCors(builder.Configuration);
