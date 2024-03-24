@@ -16,8 +16,6 @@ namespace QuizCrafter.ModularComponents.MultiChoiceQuestion.Presentation.Models
 
         public IEnumerable<Answer> Answers => _answers;
 
-        public override string Type => nameof(Question);
-
         private IList<Answer> _answers = new List<Answer>();
 
         public void AddAnswer(Answer answer)

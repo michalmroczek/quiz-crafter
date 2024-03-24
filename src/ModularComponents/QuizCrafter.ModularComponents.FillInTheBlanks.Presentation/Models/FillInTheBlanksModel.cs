@@ -10,7 +10,5 @@ namespace QuizCrafter.ModularComponents.FillInTheBlanks.Presentation.Models
         public int Order { get; set; }
 
         public List<TextWithBlank> textWithBlanks { get; set; }
-
-        public override string Type => nameof(FillInTheBlanksModel);
     }
 }
