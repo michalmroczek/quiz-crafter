@@ -62,15 +62,15 @@
     private async Task CreateQuizAsync()
     {
         using var httpClient = _httpClientFactory.CreateClient("QuizCrafter.API");
-
-        await httpClient.PostAsJsonAsync($"{httpClient.BaseAddress}/me/quizzes", new CreateQuizRequest(){Quiz = new QuizDto()
-        {
-            Id  = quiz.Id,
-            Title = quiz.Title,
-            Questions = quiz.Questions,
-            Tags = quiz.Tags
-        }
-        });
+        QuizDto quizDto = new()
+            {
+                Id = quiz.Id,
+                Title = quiz.Title,
+                Questions = quiz.Questions,
+                Tags = quiz.Tags
+            };
+        
+    await httpClient.PostAsJsonAsync($"{httpClient.BaseAddress}/me/quizzes", new CreateQuizRequest() { Quiz = quizDto});
     }
 
     private void SortList((int oldIndex, int newIndex) indices)

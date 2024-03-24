@@ -8,8 +8,6 @@ namespace QuizCrafter.ModularComponents.PlaceInCorrectOrder.Presentation.Models
 
         public int Order { get; set; }
 
-        public override string Type => nameof(PlaceInCorrectOrderModel);
-
         internal List<Section> Sections { get; set; }
 
         internal List<AnswerItem> Answers { get; set; }
