@@ -1,5 +1,6 @@
 ﻿@using System.Text.Json
 @using Microsoft.AspNetCore.Components.WebAssembly.Services
+@using Newtonsoft.Json
 @using QuizCrafter.ModularComponents.Abstraction
 @using QuizCrafter.ModularComponents.Abstraction.ComponentLoader
 @using QuizCrafter.Shared.Contracts.Quizzes.Contracts.Requests
@@ -7,6 +8,7 @@
 @using QuizCrafter.Web.Quiz.Models
 @using System.Reflection
 @using QuizCrafter.ModularComponents.Abstraction.Core
+@using System.Text
 @inject IModularComponentCollection _modularComponentCollection;
 @inject LazyAssemblyLoader AssemblyLoader
 @inject IHttpClientFactory _httpClientFactory
@@ -69,8 +71,17 @@
                 Questions = quiz.Questions,
                 Tags = quiz.Tags
             };
-        
-    await httpClient.PostAsJsonAsync($"{httpClient.BaseAddress}/me/quizzes", new CreateQuizRequest() { Quiz = quizDto});
+        var createQuizRequest = new { createQuizRequest= new CreateQuizRequest() { Quiz = quizDto } };
+        var settings = new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.Auto, // Or TypeNameHandling.Objects/All as needed
+                Formatting = Formatting.Indented,
+                // Other settings as necessary
+            };
+
+        var content = new StringContent(JsonConvert.SerializeObject(createQuizRequest, settings), Encoding.UTF8, "application/json");
+
+        await httpClient.PostAsync($"{httpClient.BaseAddress}/me/quizzes", content);
     }
 
     private void SortList((int oldIndex, int newIndex) indices)
