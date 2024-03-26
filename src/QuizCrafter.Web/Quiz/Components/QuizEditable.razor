@@ -71,7 +71,7 @@
                 Questions = quiz.Questions,
                 Tags = quiz.Tags
             };
-        var createQuizRequest = new { createQuizRequest= new CreateQuizRequest() { Quiz = quizDto } };
+        var createQuizRequest = new CreateQuizRequest() { Quiz = quizDto } ;
         var settings = new JsonSerializerSettings
             {
                 TypeNameHandling = TypeNameHandling.Auto, // Or TypeNameHandling.Objects/All as needed
