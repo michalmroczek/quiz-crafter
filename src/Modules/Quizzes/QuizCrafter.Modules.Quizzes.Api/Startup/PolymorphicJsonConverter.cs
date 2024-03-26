@@ -1,55 +1,48 @@
 ﻿using System.Reflection;
 using System.Text.Json.Serialization;
 using System.Text.Json;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace QuizCrafter.Modules.Quizzes.Api.Startup
 {
-    public class PolymorphicJsonConverter<TBase> : JsonConverter<TBase> where TBase : ModularComponents.Abstraction.Core.ModularComponentModel
+    public class PolymorphicJsonConverter<TBase> : Newtonsoft.Json.JsonConverter where TBase : ModularComponents.Abstraction.Core.ModularComponentModel
     {
         private readonly IDictionary<string, Type> _typeMapping;
 
         public PolymorphicJsonConverter()
         {
-
+            _typeMapping = new Dictionary<string, Type>();
             string assemblyPath = Assembly.GetExecutingAssembly().Location;
             var directoryAssemblies = Directory.GetFiles(Path.GetDirectoryName(assemblyPath), "QuizCrafter.ModularComponents.*.Presentation.dll")
                                                 .Select(Assembly.LoadFrom);
 
             var derivedTypesFromDirectory = FindDerivedTypes<TBase>(directoryAssemblies);
-            _typeMapping = new Dictionary<string, Type>();
-
-            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-            var baseType = typeof(TBase);
-
 
             foreach (var type in derivedTypesFromDirectory)
             {
-                if (type.IsClass && !type.IsAbstract && baseType.IsAssignableFrom(type))
+                if (type.IsClass && !type.IsAbstract && typeof(TBase).IsAssignableFrom(type))
                 {
                     _typeMapping.Add(type.Name, type);
                 }
             }
         }
 
-        List<Type> FindDerivedTypes<TBase>(IEnumerable<Assembly> assemblies)
+        private List<Type> FindDerivedTypes<T>(IEnumerable<Assembly> assemblies)
         {
-            var baseType = typeof(TBase);
+            var baseType = typeof(T);
             var derivedTypes = new List<Type>();
 
             foreach (var assembly in assemblies)
             {
                 try
                 {
-                    foreach (var type in assembly.GetTypes())
-                    {
-                        if (type.IsClass && !type.IsAbstract && baseType.IsAssignableFrom(type))
-                        {
-                            derivedTypes.Add(type);
-                        }
-                    }
+                    derivedTypes.AddRange(assembly.GetTypes()
+                        .Where(type => type.IsClass && !type.IsAbstract && baseType.IsAssignableFrom(type)));
                 }
-                catch (ReflectionTypeLoadException ex)
+                catch (ReflectionTypeLoadException)
                 {
+                    // Optionally handle or log exceptions
                 }
                 catch (Exception)
                 {
@@ -59,25 +52,39 @@ namespace QuizCrafter.Modules.Quizzes.Api.Startup
 
             return derivedTypes;
         }
-        public override TBase Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+
+        public override bool CanConvert(Type objectType)
         {
-            using (var jsonDoc = JsonDocument.ParseValue(ref reader))
-            {
-                var root = jsonDoc.RootElement;
-                var typeDiscriminator = root.GetProperty("type").GetString();
-
-                if (_typeMapping.TryGetValue(typeDiscriminator, out var targetType))
-                {
-                    return JsonSerializer.Deserialize(root.GetRawText(), targetType, options) as TBase;
-                }
-
-                throw new JsonException($"Unable to determine the type for discriminator {typeDiscriminator}");
-            }
+            return typeof(TBase).IsAssignableFrom(objectType);
         }
 
-        public override void Write(Utf8JsonWriter writer, TBase value, JsonSerializerOptions options)
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, Newtonsoft.Json.JsonSerializer serializer)
         {
-            JsonSerializer.Serialize(writer, value, value.GetType(), options);
+            JObject item = JObject.Load(reader);
+            var typeDiscriminator = item["Type"].Value<string>();
+
+            if (_typeMapping.TryGetValue(typeDiscriminator, out var targetType))
+            {
+                // Create a new JsonSerializer that doesn't include the problematic converter
+                var newSerializer = new Newtonsoft.Json.JsonSerializer();
+                foreach (var converter in serializer.Converters)
+                {
+                    if (!(converter is PolymorphicJsonConverter<TBase>))
+                    {
+                        newSerializer.Converters.Add(converter);
+                    }
+                }
+
+                // Populate and return the object without causing recursion
+                return item.ToObject(targetType, newSerializer);
+            }
+
+            throw new Newtonsoft.Json.JsonException($"Unable to determine the type for discriminator {typeDiscriminator}");
+        }
+
+        public override void WriteJson(JsonWriter writer, object value, Newtonsoft.Json.JsonSerializer serializer)
+        {
+            serializer.Serialize(writer, value, value.GetType());
         }
     }
 }

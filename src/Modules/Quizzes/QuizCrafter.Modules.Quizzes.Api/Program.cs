@@ -11,9 +11,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
 builder.Services.AddMediatR(conf => conf.RegisterServicesFromAssemblies(typeof(Program).Assembly, typeof(ApplicationStartupExtensions).Assembly));
-builder.Services.AddControllers().AddJsonOptions(opts =>
+builder.Services.AddControllers().AddNewtonsoftJson(opts =>
 {
-    opts.JsonSerializerOptions.Converters.Add(new PolymorphicJsonConverter<ModularComponentModel>());
+    opts.SerializerSettings.Converters.Add(new PolymorphicJsonConverter<ModularComponentModel>());
 });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
