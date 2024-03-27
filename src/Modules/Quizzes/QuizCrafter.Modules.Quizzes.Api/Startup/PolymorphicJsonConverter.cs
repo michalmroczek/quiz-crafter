@@ -1,31 +1,18 @@
 ﻿using System.Reflection;
-using System.Text.Json.Serialization;
-using System.Text.Json;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using QuizCrafter.Shared.Infrastructure.AssemblyLoaders;
 
 namespace QuizCrafter.Modules.Quizzes.Api.Startup
 {
     public class PolymorphicJsonConverter<TBase> : Newtonsoft.Json.JsonConverter where TBase : ModularComponents.Abstraction.Core.ModularComponentModel
     {
-        private readonly IDictionary<string, Type> _typeMapping;
+        private readonly TypeFinder<TBase> _typeFinder;
 
         public PolymorphicJsonConverter()
         {
-            _typeMapping = new Dictionary<string, Type>();
-            string assemblyPath = Assembly.GetExecutingAssembly().Location;
-            var directoryAssemblies = Directory.GetFiles(Path.GetDirectoryName(assemblyPath), "QuizCrafter.ModularComponents.*.Presentation.dll")
-                                                .Select(Assembly.LoadFrom);
 
-            var derivedTypesFromDirectory = FindDerivedTypes<TBase>(directoryAssemblies);
-
-            foreach (var type in derivedTypesFromDirectory)
-            {
-                if (type.IsClass && !type.IsAbstract && typeof(TBase).IsAssignableFrom(type))
-                {
-                    _typeMapping.Add(type.Name, type);
-                }
-            }
+            _typeFinder = new TypeFinder<TBase>("QuizCrafter.ModularComponents.*.Presentation.dll");
         }
 
         private List<Type> FindDerivedTypes<T>(IEnumerable<Assembly> assemblies)
@@ -62,8 +49,8 @@ namespace QuizCrafter.Modules.Quizzes.Api.Startup
         {
             JObject item = JObject.Load(reader);
             var typeDiscriminator = item["Type"].Value<string>();
-
-            if (_typeMapping.TryGetValue(typeDiscriminator, out var targetType))
+            var targetType = _typeFinder.GetTypeByName(typeDiscriminator);
+            if (targetType is not null)
             {
                 // Create a new JsonSerializer that doesn't include the problematic converter
                 var newSerializer = new Newtonsoft.Json.JsonSerializer();
@@ -79,7 +66,7 @@ namespace QuizCrafter.Modules.Quizzes.Api.Startup
                 return item.ToObject(targetType, newSerializer);
             }
 
-            throw new Newtonsoft.Json.JsonException($"Unable to determine the type for discriminator {typeDiscriminator}");
+            throw new JsonException($"Unable to determine the type for discriminator {typeDiscriminator}");
         }
 
         public override void WriteJson(JsonWriter writer, object value, Newtonsoft.Json.JsonSerializer serializer)
