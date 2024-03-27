@@ -25,6 +25,7 @@
     <ProjectReference Include="..\..\..\ModularComponents\QuizCrafter.ModularComponents.MultiChoiceQuestion.Presentation\QuizCrafter.ModularComponents.MultiChoiceQuestion.Presentation.csproj" />
     <ProjectReference Include="..\..\..\ModularComponents\QuizCrafter.ModularComponents.PlaceInCorrectOrder.Presentation\QuizCrafter.ModularComponents.PlaceInCorrectOrder.Presentation.csproj" />
     <ProjectReference Include="..\..\..\Shared\QuizCrafter.Shared.Contracts\QuizCrafter.Shared.Contracts.csproj" />
+    <ProjectReference Include="..\..\..\Shared\QuizCrafter.Shared.Infrastructure\QuizCrafter.Shared.Infrastructure.csproj" />
     <ProjectReference Include="..\QuizCrafter.Modules.Quizzes.Application\QuizCrafter.Modules.Quizzes.Application.csproj" />
     <ProjectReference Include="..\QuizCrafter.Modules.Quizzes.Infrastructure\QuizCrafter.Modules.Quizzes.Infrastructure.csproj" />
   </ItemGroup>
